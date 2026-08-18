@@ -1,0 +1,21 @@
+# @package _global_
+
+defaults:
+- override /model: latent_additive
+- override /callbacks: default
+- override /data: jiang24
+
+trainer:
+  max_epochs: 400
+  min_epochs: 5
+
+model:
+  dropout: 0.30000000000000004
+  encoder_width: 2304
+  inject_covariates_decoder: true
+  inject_covariates_encoder: true
+  latent_dim: 64
+  lr: 5.651369387154785e-05
+  n_layers: 4
+  softplus_output: true
+  wd: 5.768768409829649e-10
