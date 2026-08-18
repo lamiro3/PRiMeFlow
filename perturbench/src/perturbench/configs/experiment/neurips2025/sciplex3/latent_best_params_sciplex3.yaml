@@ -1,0 +1,29 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /model: latent_additive
+  - override /data: sciplex3
+  - override /data/evaluation: final_test
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+seed: 245
+
+trainer:
+  min_epochs: 5
+  max_epochs: 500
+
+model:
+  dropout: 0.3
+  encoder_width: 5376
+  inject_covariates_decoder: true
+  inject_covariates_encoder: true
+  latent_dim: 192
+  lr: 3.411309338851789e-05
+  n_layers: 2
+  softplus_output: true
+  wd: 6.078971860813963e-11
