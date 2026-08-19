@@ -1,0 +1,17 @@
+_target_: perturbench.modelcore.models.PrimeFlow
+n_genes: null
+n_perts: null
+lr: 1e-4
+wd: 1e-5
+hidden_dim: 1024
+time_dim: 128
+n_ode_steps: 100
+sigma: 0.0
+p_uncond: 0.1
+cfg_weight: 1.0
+unet_channels: 32
+unet_channel_mult: [1, 2, 4, 8]
+unet_num_res_blocks: 2
+use_ode_predict: True
+softplus_output: False
+inject_covariates: True
