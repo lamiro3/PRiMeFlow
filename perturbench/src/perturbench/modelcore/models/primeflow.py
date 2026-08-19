@@ -142,7 +142,7 @@ class PrimeFlow(PerturbationModel):
         return cond
 
     # ------------------------------------------------------------------
-    # Loss_ cfm (L_cfm) - L_fm은 코드로 계산 불가능 ~ 저번 PT 자료 참고 바람
+    # Loss_ cfm (L_cfm) - L_fm은 코드로 계산 불가능 ~ 7.28일자 랩 미팅 PT 자료 참고 바람
     # ------------------------------------------------------------------
     def get_flow_loss(self, batch: Batch):
         x1, control, perturbation, covariates, _ = self.unpack_batch(batch)
