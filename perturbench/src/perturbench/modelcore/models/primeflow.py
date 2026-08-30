@@ -245,7 +245,17 @@ class PrimeFlow(PerturbationModel):
         if self.softplus_output:
             x0 = self._inverse_softplus(x0)
 
-        pred = self.integrate(x0, cond, self.cfg_weight)
+        # <prev> pred = self.integrate(x0, cond, self.cfg_weight)
+        
+        # <chunking: vram overflow 대비>
+        chunk = 512 # chunking 단위
+        preds = []
+                
+        for i in range(0, x0.shape[0], chunk):
+            x_i = x0[i:i+chunk]
+            c_i = cond[i:i+chunk]
+            preds.append(self.integrate(x_i, c_i, self.cfg_weight))
+        pred = torch.cat(preds, dim=0)
 
         if self.softplus_output:
             pred = F.softplus(pred)
