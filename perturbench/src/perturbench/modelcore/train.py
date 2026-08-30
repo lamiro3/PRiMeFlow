@@ -2,6 +2,7 @@ import logging
 from typing import List
 import hydra
 import lightning as L
+import torch
 from omegaconf import DictConfig
 from lightning.pytorch.loggers import Logger
 from perturbench.modelcore.utils import multi_instantiate
@@ -47,6 +48,8 @@ def train(runtime_context: dict):
 
     summary_metrics_dict = {}
     if cfg.get("test"):
+        if cfg.get("train") and torch.cuda.is_available():
+            torch.cuda.empty_cache()
         log.info("Starting testing!")
         if cfg.get("train"):
             if (

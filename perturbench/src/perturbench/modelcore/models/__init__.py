@@ -7,3 +7,4 @@ from .biolord import BiolordStar
 from .average import Average
 from .cpa import CPA
 from .flow_matching import FlowMatching
+from .primeflow import PrimeFlow
