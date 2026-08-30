@@ -1,8 +1,8 @@
 _target_: perturbench.modelcore.models.PrimeFlow
 n_genes: null
 n_perts: null
-lr: 1e-4
-wd: 1e-5
+lr: 1e-3 # FlowMatching Unet train에서 1e-4로 했을 때 metrics 결과 엉망진창이었음 - baseline model 근처도 도달하지 못했음 
+wd: 1e-4
 hidden_dim: 1024
 time_dim: 128
 n_ode_steps: 100

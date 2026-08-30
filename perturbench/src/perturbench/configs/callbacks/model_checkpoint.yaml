@@ -3,4 +3,4 @@ model_checkpoint:
   monitor: val_loss # quantity to monitor
   dirpath: ${hydra:runtime.output_dir}/checkpoints # directory to save checkpoints
   # every_n_train_steps: 80 # save checkpoint every n train steps
-  # every_n_epochs: 5 # save checkpoint every n epochs
+  every_n_epochs: 1 # save checkpoint every n epochs
