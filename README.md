@@ -64,7 +64,6 @@ pip install -e .
 
 베이스 프레임워크인 PerturBench를 사용한다면 아래 논문을 인용해주세요.
 
-```
 @inproceedings{wu2025perturbench,
   title={PerturBench: Benchmarking Machine Learning Models for Cellular Perturbation Analysis},
   author={Yan Wu and Esther Wershof and Sebastian M Schmon and Marcel Nassar and Błażej Osiński and Ridvan Eksi and Zichao Yan and Rory Stark and Kun Zhang and Thore Graepel},
@@ -72,4 +71,3 @@ pip install -e .
   year={2025},
   url={https://openreview.net/forum?id=PPPDuyiZaG},
 }
-```
