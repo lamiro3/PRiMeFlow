@@ -1,0 +1,11 @@
+- experiment=primeflow/norman19
+- model.architecture=unet
+- model.unet_channels=16
+- data.loader.batch_size=128
+- +data.loader.ddp_mode=true
+- trainer.devices=4
+- +trainer.strategy=ddp
+- +trainer.use_distributed_sampler=false
+- trainer.max_epochs=100
+- callbacks.early_stopping.patience=10
+- model.n_ode_steps=50

@@ -1,0 +1,35 @@
+[2026-09-30 10:34:58,794][perturbench.modelcore.train][INFO] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>
+[2026-09-30 10:35:02,298][perturbench.data.modules][WARNING] - val dataset is missing perturbations from train dataset.
+[2026-09-30 10:35:03,528][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3/train_test_split.csv
+[2026-09-30 10:35:03,538][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3/perturbation_covariate_split_map.csv
+[2026-09-30 10:35:03,538][perturbench.modelcore.train][INFO] - Instantiating model <model.Primeflow.PrimeFlow>
+[2026-09-30 10:35:03,968][perturbench.modelcore.train][WARNING] - 45 perturbation(s) in val split are not in the pretrained encoder and will fail during evaluation: {'FOXF1+FOXL2', 'SAMD1+ZBTB1', 'MAP2K3+MAP2K6', 'RHOXF2+ZBTB25', 'FOXL2NB+FOXL2', 'PTPN12+ZBTB25', 'BPGM+ZBTB1', 'MAP2K3+IKZF3', 'CBL+UBASH3A', 'MAPK1+PRTG', 'DUSP9+PRTG', 'PLK4+STIL', 'UBASH3B+CNN1', 'AHR+FEV', 'PRDM1+CBFA2T3', 'SET+CEBPE', 'CDKN1C+CDKN1A', 'PTPN12+PTPN9', 'ETS2+MAPK1', 'TGFBR2+ETS2', 'ZC3HAV1+CEBPA', 'DUSP9+IGDCC3', 'CEBPB+OSR2', 'CEBPB+PTPN12', 'SGK1+TBX3', 'FOXL2+MEIS1', 'KLF1+MAP2K6', 'DUSP9+MAPK1', 'FOXA1+FOXL2', 'KLF1+FOXA1', 'CEBPE+CEBPA', 'IRF1+SET', 'FOXF1+HOXB9', 'LYL1+IER5L', 'CEBPE+PTPN12', 'SAMD1+TGFBR2', 'JUN+CEBPB', 'SNAI1+UBASH3B', 'DUSP9+ETS2', 'ZBTB10+MIDEAS', 'UBASH3B+PTPN9', 'CEBPE+SPI1', 'FOXA3+FOXF1', 'FOXA1+HOXB9', 'SAMD1+UBASH3B'}
+[2026-09-30 10:35:03,972][perturbench.modelcore.train][WARNING] - 46 perturbation(s) in test split are not in the pretrained encoder and will fail during evaluation: {'ETS2+IGDCC3', 'MAP2K3+MIDEAS', 'CEBPE+CNN1', 'MAPK1+TGFBR2', 'POU3F2+CBFA2T3', 'CBL+CNN1', 'KIF18B+KIF2C', 'FOSB+UBASH3B', 'PTPN12+UBASH3A', 'DUSP9+SNAI1', 'FEV+CBFA2T3', 'TBX3+TBX2', 'FEV+MAP7D1', 'POU3F2+FOXL2', 'JUN+CEBPA', 'AHR+KLF1', 'UBASH3B+PTPN12', 'ZBTB10+SNAI1', 'ETS2+CEBPE', 'BCL2L11+BAK1', 'IGDCC3+MAPK1', 'UBASH3B+OSR2', 'SGK1+TBX2', 'CDKN1C+CDKN1B', 'SGK1+S1PR2', 'TGFBR2+CBARP', 'BPGM+SAMD1', 'FOXA3+FOXL2', 'CEBPB+MAPK1', 'MAP2K3+SLC38A2', 'TGFBR2+PRTG', 'LHX1+MIDEAS', 'IGDCC3+PRTG', 'ZC3HAV1+CEBPE', 'CEBPE+CEBPB', 'CNN1+UBASH3A', 'KLF1+CEBPA', 'ETS2+CNN1', 'CBL+TGFBR2', 'FOXA3+HOXB9', 'MAP2K6+SPI1', 'FOXA1+FOXF1', 'TGFBR2+IGDCC3', 'ZBTB10+PTPN12', 'CNN1+MAPK1', 'CBL+PTPN12'}
+[2026-09-30 10:35:03,972][perturbench.modelcore.train][INFO] - Instantiating callbacks...
+[2026-09-30 10:35:03,972][perturbench.modelcore.utils][INFO] - Instantiating <early_stopping> of type <DictConfig>
+[2026-09-30 10:35:03,973][perturbench.modelcore.utils][INFO] - Instantiating <lr_monitor> of type <DictConfig>
+[2026-09-30 10:35:03,974][perturbench.modelcore.utils][INFO] - Instantiating <model_summary> of type <DictConfig>
+[2026-09-30 10:35:03,975][perturbench.modelcore.utils][INFO] - Instantiating <model_checkpoint> of type <DictConfig>
+[2026-09-30 10:35:03,977][perturbench.modelcore.utils][INFO] - Instantiating <rich_progress_bar> of type <DictConfig>
+[2026-09-30 10:35:03,978][perturbench.modelcore.train][INFO] - Instantiating loggers...
+[2026-09-30 10:35:03,978][perturbench.modelcore.utils][INFO] - Instantiating <tensorboard> of type <DictConfig>
+[2026-09-30 10:35:03,981][perturbench.modelcore.utils][INFO] - Instantiating <csv> of type <DictConfig>
+[2026-09-30 10:35:03,982][perturbench.modelcore.train][INFO] - Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-09-30 10:35:04,030][perturbench.modelcore.train][INFO] - Starting testing!
+[2026-09-30 10:35:05,044][perturbench.data.modules][WARNING] - test dataset is missing perturbations from train dataset.
+[2026-09-30 10:35:06,291][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3/train_test_split.csv
+[2026-09-30 10:35:06,298][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3/perturbation_covariate_split_map.csv
+[2026-09-30 12:05:18,801][perturbench.modelcore.models.base][INFO] - Launching cell-eval subprocess for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3/evaluation//cell_eval/k562
+[2026-09-30 12:05:20,225][perturbench.modelcore.models.base][WARNING] - cell-eval subprocess failed (exit 1) for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3/evaluation//cell_eval/k562.
+stderr: Traceback (most recent call last):
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 45, in <module>
+    main()
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 27, in main
+    from cell_eval import MetricsEvaluator
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/__init__.py", line 1, in <module>
+    from ._baseline import build_base_mean_adata
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/_baseline.py", line 8, in <module>
+    from pdex import parallel_differential_expression
+ImportError: cannot import name 'parallel_differential_expression' from 'pdex' (/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/pdex/__init__.py)
+
+[2026-09-30 12:05:20,445][perturbench.modelcore.models.base][WARNING] - Skipping cell-eval metrics for covariate k562

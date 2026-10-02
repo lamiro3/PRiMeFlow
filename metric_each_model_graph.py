@@ -1,4 +1,7 @@
+import glob
+import os
 import re
+import sys
 
 import matplotlib
 matplotlib.use('Agg')
@@ -16,11 +19,12 @@ import numpy as np
 #   True  = 7개 모델 내 상대 순위로 재정규화 (변별력 높음, 의미는 '상대적')
 RELATIVE_RANK = False
 
+# perturbench 가 csv logger 에 남기는 metric 이름 ({metric}_{aggregation}, rank 는 {metric}_rank_{aggregation})
 metrics = [
-    'rmse_avg', 'rmse_rank_avg',
-    'cos_pca_avg', 'cos_rank_pca_avg',
-    'cos_logfc', 'cos_rank_logfc',
-    'r2_score', 'top_k_recall_score',
+    'rmse_average', 'rmse_rank_average',
+    'cosine_pca_average', 'cosine_rank_pca_average',
+    'cosine_logfc', 'cosine_rank_logfc',
+    'r2_score_scores', 'top_k_recall_scores',
     'mmd_pca', 'mmd_rank_pca',
 ]
 
@@ -68,7 +72,36 @@ METRIC_GROUPS = {
 #   -> [.1117, .3904, .3361, .6192, .0807, .4616, -.9993, .0, 1.549, .6263]
 
 
-models = {
+# ─────────────────────────────────────────────────────────────
+# 비교할 run: 표시 이름 -> run 폴더 (train 한 번 = logs/train/runs/<날짜_시간> 하나)
+#   test metric 은 <run>/tensorboard/ 의 event 파일에서 자동으로 읽는다.
+#   어떤 run 이 있는지는 `python metric_each_model_graph.py --list` 로 확인.
+#   이름에 괄호를 붙이면 같은 family 로 묶여 색 농도로 구분됨. 예) PRiMeFlow(CFG=3.0)
+# ─────────────────────────────────────────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # RUNS 의 상대경로 기준 (PRiMeFlow 루트)
+RUN_ROOT = os.path.join(BASE_DIR, 'logs', 'train', 'runs')
+
+RUNS = {
+    # norman19, test split(final_test), seed 245 — 2026-09-29 재실행 결과
+    'Linear_additive':            'logs/train/runs/2026-09-29_20-25-04_linear',
+    'Latent_additive':            'logs/train/runs/2026-09-29_19-16-08_latent',
+    'Decoder_only':               'logs/train/runs/2026-09-29_23-14-02_decoder',
+    'CPA':                        'logs/train/runs/2026-09-29_19-16-02_cpa',
+    'SAMS_VAE':                   'logs/train/runs/2026-09-29_19-16-06_sams',
+    'Biolord':                    'logs/train/runs/2026-09-29_19-16-04_biolord',
+    'PRiMeFlow(Unet, CFG=1.0)':   'logs/train/runs/2026-09-29_20-15-34_primeflow-unet',
+    # 유전자 임베딩(unet_gene_emb_dim=16) 추가, 4-GPU DDP (유효 batch 512)
+    'PRiMeFlow(Unet+gemb, CFG=1.0)': 'logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb',
+    # 위 gemb run 과 같은 checkpoint(epoch=40) 로 cfg_weight 만 바꿔 test (model/test_primeflow.py)
+    'PRiMeFlow(Unet+gemb, CFG=3.0)': 'logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3',
+    'PRiMeFlow(Unet+gemb, CFG=5.0)': 'logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5',
+}
+
+# 예전 perturbench 버전에서 뽑아 손으로 옮겨 적은 값 (지금 버전과 split/평가 코드가
+# 달라 직접 비교 불가). 참고용으로만 남겨 둠. True 면 RUNS 결과와 같이 그림.
+INCLUDE_LEGACY = False
+
+LEGACY_MODELS = {
     'Linear_additive': [.05779, .009596, .8074, .01313, .622, .04545, -.02479, .002667, 1.334, .01364],
     'Latent_additive': [.0419, .01353, .8791, .02077, .7969, .008696, -.06922, .0, 3.247, .01304],
     'Decoder_only':    [.04305, .01111, .8817, .01111, .7588, .01061, .2202, .28, 3.326, .01313],
@@ -81,6 +114,60 @@ models = {
     'PRiMeFlow(CFG=3.0)': [.5455, .4051, .1574, .1131, .1911, .3662, .03466, .1058, 18.82, .4288],
     'PRiMeFlow(CFG=5.0)': [.5492, .4071, .1608, .1172, .1946, .3687, .03268, .1098, 19, .4591],
 }
+
+
+def read_test_metrics(run_dir):
+    """run 의 test metric {이름: 값}. test 결과가 없으면 빈 dict.
+
+    perturbench 는 test metric 을 첫 번째 logger(tensorboard)에만 기록한다
+    (csv/metrics.csv 에는 학습 loss 만 있음). 그래서 tensorboard event 파일에서
+    tag 별 마지막 값을 읽는다. cell-eval 이 성공한 run 은 그 metric 도 같이 들어온다.
+    """
+    from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
+
+    latest = {}   # tag -> (wall_time, value)
+    for f in glob.glob(os.path.join(run_dir, 'tensorboard', '*', 'events.out.tfevents.*')):
+        ea = EventAccumulator(f, size_guidance={'scalars': 0})
+        ea.Reload()
+        for tag in ea.Tags()['scalars']:
+            ev = ea.Scalars(tag)[-1]
+            if tag not in latest or ev.wall_time >= latest[tag][0]:
+                latest[tag] = (ev.wall_time, ev.value)
+    return {k: v for k, (_, v) in latest.items() if k in metrics}
+
+
+def load_run_metrics(run_dir):
+    """test metric 을 `metrics` 순서대로 반환."""
+    found = read_test_metrics(run_dir)
+    missing = [m for m in metrics if m not in found]
+    if missing:
+        raise ValueError(f"{run_dir}: test metric 이 없습니다 {missing} "
+                         f"(test 가 끝나기 전이거나 test=False 로 돌린 run)")
+    return [found[m] for m in metrics]
+
+
+def list_runs():
+    """logs/train/runs 아래 run 들의 override 와 test metric 유무를 출력."""
+    for run_dir in sorted(glob.glob(os.path.join(RUN_ROOT, '*'))):
+        ov_path = os.path.join(run_dir, '.hydra', 'overrides.yaml')
+        overrides = ([l.strip('- \n') for l in open(ov_path) if l.strip()]
+                     if os.path.exists(ov_path) else [])
+        has_test = len(read_test_metrics(run_dir)) == len(metrics)
+        print(f"{'[test O]' if has_test else '[test X]'} {os.path.relpath(run_dir, BASE_DIR)}")
+        for o in overrides:
+            print(f"           {o}")
+
+
+if '--list' in sys.argv:
+    list_runs()
+    sys.exit(0)
+
+models = {name: load_run_metrics(os.path.join(BASE_DIR, d)) for name, d in RUNS.items()}
+if INCLUDE_LEGACY:
+    models = {**LEGACY_MODELS, **models}
+if len(models) < 2:
+    sys.exit("비교할 모델이 2개 이상 필요합니다. RUNS 에 run 폴더를 채우세요 "
+             "(`python metric_each_model_graph.py --list` 로 목록 확인).")
 
 palette = {
     'Linear_additive': "#2097F9", 'Latent_additive': "#1DBF4A",

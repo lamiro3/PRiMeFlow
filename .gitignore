@@ -1,2 +1,7 @@
-data
+data/
 __pycache__
+
+# large training artifacts
+*.ckpt
+*.h5ad
+*.pkl

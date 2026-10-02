@@ -1,0 +1,94 @@
+[2026-09-30 01:04:58,563][perturbench.modelcore.train][INFO] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>
+[2026-09-30 01:05:02,147][perturbench.data.modules][WARNING] - val dataset is missing perturbations from train dataset.
+[2026-09-30 01:05:03,327][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:05:03,336][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 01:05:03,337][perturbench.modelcore.train][INFO] - Instantiating model <model.Primeflow.PrimeFlow>
+[2026-09-30 01:05:04,407][perturbench.modelcore.train][INFO] - Instantiating callbacks...
+[2026-09-30 01:05:04,407][perturbench.modelcore.utils][INFO] - Instantiating <early_stopping> of type <DictConfig>
+[2026-09-30 01:05:04,408][perturbench.modelcore.utils][INFO] - Instantiating <lr_monitor> of type <DictConfig>
+[2026-09-30 01:05:04,409][perturbench.modelcore.utils][INFO] - Instantiating <model_summary> of type <DictConfig>
+[2026-09-30 01:05:04,410][perturbench.modelcore.utils][INFO] - Instantiating <model_checkpoint> of type <DictConfig>
+[2026-09-30 01:05:04,412][perturbench.modelcore.utils][INFO] - Instantiating <rich_progress_bar> of type <DictConfig>
+[2026-09-30 01:05:04,413][perturbench.modelcore.train][INFO] - Instantiating loggers...
+[2026-09-30 01:05:04,413][perturbench.modelcore.utils][INFO] - Instantiating <tensorboard> of type <DictConfig>
+[2026-09-30 01:05:04,415][perturbench.modelcore.utils][INFO] - Instantiating <csv> of type <DictConfig>
+[2026-09-30 01:05:04,416][perturbench.modelcore.train][INFO] - Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-09-30 01:05:04,479][perturbench.modelcore.train][INFO] - Starting training!
+[2026-09-30 01:05:09,776][perturbench.modelcore.train][INFO] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>
+[2026-09-30 01:05:09,837][perturbench.modelcore.train][INFO] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>
+[2026-09-30 01:05:09,976][perturbench.modelcore.train][INFO] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>
+[2026-09-30 01:05:12,810][perturbench.data.modules][WARNING] - val dataset is missing perturbations from train dataset.
+[2026-09-30 01:05:12,921][perturbench.data.modules][WARNING] - val dataset is missing perturbations from train dataset.
+[2026-09-30 01:05:14,024][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:05:14,033][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 01:05:14,034][perturbench.modelcore.train][INFO] - Instantiating model <model.Primeflow.PrimeFlow>
+[2026-09-30 01:05:14,115][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:05:14,123][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 01:05:14,123][perturbench.modelcore.train][INFO] - Instantiating model <model.Primeflow.PrimeFlow>
+[2026-09-30 01:05:14,282][perturbench.data.modules][WARNING] - val dataset is missing perturbations from train dataset.
+[2026-09-30 01:05:15,009][perturbench.modelcore.train][INFO] - Instantiating callbacks...
+[2026-09-30 01:05:15,010][perturbench.modelcore.utils][INFO] - Instantiating <early_stopping> of type <DictConfig>
+[2026-09-30 01:05:15,010][perturbench.modelcore.utils][INFO] - Instantiating <lr_monitor> of type <DictConfig>
+[2026-09-30 01:05:15,011][perturbench.modelcore.utils][INFO] - Instantiating <model_summary> of type <DictConfig>
+[2026-09-30 01:05:15,012][perturbench.modelcore.utils][INFO] - Instantiating <model_checkpoint> of type <DictConfig>
+[2026-09-30 01:05:15,014][perturbench.modelcore.utils][INFO] - Instantiating <rich_progress_bar> of type <DictConfig>
+[2026-09-30 01:05:15,015][perturbench.modelcore.train][INFO] - Instantiating loggers...
+[2026-09-30 01:05:15,015][perturbench.modelcore.utils][INFO] - Instantiating <tensorboard> of type <DictConfig>
+[2026-09-30 01:05:15,017][perturbench.modelcore.utils][INFO] - Instantiating <csv> of type <DictConfig>
+[2026-09-30 01:05:15,018][perturbench.modelcore.train][INFO] - Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-09-30 01:05:15,083][perturbench.modelcore.train][INFO] - Starting training!
+[2026-09-30 01:05:15,110][perturbench.modelcore.train][INFO] - Instantiating callbacks...
+[2026-09-30 01:05:15,110][perturbench.modelcore.utils][INFO] - Instantiating <early_stopping> of type <DictConfig>
+[2026-09-30 01:05:15,111][perturbench.modelcore.utils][INFO] - Instantiating <lr_monitor> of type <DictConfig>
+[2026-09-30 01:05:15,112][perturbench.modelcore.utils][INFO] - Instantiating <model_summary> of type <DictConfig>
+[2026-09-30 01:05:15,113][perturbench.modelcore.utils][INFO] - Instantiating <model_checkpoint> of type <DictConfig>
+[2026-09-30 01:05:15,115][perturbench.modelcore.utils][INFO] - Instantiating <rich_progress_bar> of type <DictConfig>
+[2026-09-30 01:05:15,115][perturbench.modelcore.train][INFO] - Instantiating loggers...
+[2026-09-30 01:05:15,115][perturbench.modelcore.utils][INFO] - Instantiating <tensorboard> of type <DictConfig>
+[2026-09-30 01:05:15,117][perturbench.modelcore.utils][INFO] - Instantiating <csv> of type <DictConfig>
+[2026-09-30 01:05:15,119][perturbench.modelcore.train][INFO] - Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-09-30 01:05:15,188][perturbench.modelcore.train][INFO] - Starting training!
+[2026-09-30 01:05:15,419][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:05:15,429][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 01:05:15,429][perturbench.modelcore.train][INFO] - Instantiating model <model.Primeflow.PrimeFlow>
+[2026-09-30 01:05:16,592][perturbench.modelcore.train][INFO] - Instantiating callbacks...
+[2026-09-30 01:05:16,593][perturbench.modelcore.utils][INFO] - Instantiating <early_stopping> of type <DictConfig>
+[2026-09-30 01:05:16,594][perturbench.modelcore.utils][INFO] - Instantiating <lr_monitor> of type <DictConfig>
+[2026-09-30 01:05:16,595][perturbench.modelcore.utils][INFO] - Instantiating <model_summary> of type <DictConfig>
+[2026-09-30 01:05:16,595][perturbench.modelcore.utils][INFO] - Instantiating <model_checkpoint> of type <DictConfig>
+[2026-09-30 01:05:16,598][perturbench.modelcore.utils][INFO] - Instantiating <rich_progress_bar> of type <DictConfig>
+[2026-09-30 01:05:16,598][perturbench.modelcore.train][INFO] - Instantiating loggers...
+[2026-09-30 01:05:16,599][perturbench.modelcore.utils][INFO] - Instantiating <tensorboard> of type <DictConfig>
+[2026-09-30 01:05:16,600][perturbench.modelcore.utils][INFO] - Instantiating <csv> of type <DictConfig>
+[2026-09-30 01:05:16,602][perturbench.modelcore.train][INFO] - Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-09-30 01:05:16,667][perturbench.modelcore.train][INFO] - Starting training!
+[2026-09-30 01:39:45,718][perturbench.modelcore.train][INFO] - Starting testing!
+[2026-09-30 01:39:45,737][perturbench.modelcore.train][INFO] - Starting testing!
+[2026-09-30 01:39:45,757][perturbench.modelcore.train][INFO] - Starting testing!
+[2026-09-30 01:39:45,774][perturbench.modelcore.train][INFO] - Starting testing!
+[2026-09-30 01:39:46,183][perturbench.data.modules][WARNING] - test dataset is missing perturbations from train dataset.
+[2026-09-30 01:39:46,280][perturbench.data.modules][WARNING] - test dataset is missing perturbations from train dataset.
+[2026-09-30 01:39:46,321][perturbench.data.modules][WARNING] - test dataset is missing perturbations from train dataset.
+[2026-09-30 01:39:46,329][perturbench.data.modules][WARNING] - test dataset is missing perturbations from train dataset.
+[2026-09-30 01:39:47,385][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:39:47,392][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 01:39:47,540][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:39:47,548][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 01:39:47,583][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:39:47,592][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 01:39:47,643][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv
+[2026-09-30 01:39:47,650][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv
+[2026-09-30 02:18:12,740][perturbench.modelcore.models.base][INFO] - Launching cell-eval subprocess for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/evaluation//cell_eval/k562
+[2026-09-30 02:18:14,005][perturbench.modelcore.models.base][WARNING] - cell-eval subprocess failed (exit 1) for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/evaluation//cell_eval/k562.
+stderr: Traceback (most recent call last):
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 45, in <module>
+    main()
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 27, in main
+    from cell_eval import MetricsEvaluator
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/__init__.py", line 1, in <module>
+    from ._baseline import build_base_mean_adata
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/_baseline.py", line 8, in <module>
+    from pdex import parallel_differential_expression
+ImportError: cannot import name 'parallel_differential_expression' from 'pdex' (/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/pdex/__init__.py)
+
+[2026-09-30 02:18:14,244][perturbench.modelcore.models.base][WARNING] - Skipping cell-eval metrics for covariate k562

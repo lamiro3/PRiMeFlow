@@ -1,0 +1,169 @@
+Seed set to 245
+[[36m2026-09-29 19:16:06,291[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/datasplitter.py:604: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for covariates, df in self.obs_dataframe.groupby(self.covariate_keys):
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+           train  val  test
+('k562',)    146   46    47
+[[36m2026-09-29 19:16:09,156[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - val dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-29 19:16:10,295[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/train_test_split.csv[0m
+[[36m2026-09-29 19:16:10,303[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-29 19:16:10,303[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating model <perturbench.modelcore.models.SparseAdditiveVAE>[0m
+[[36m2026-09-29 19:16:11,973[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating callbacks...[0m
+[[36m2026-09-29 19:16:11,974[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <early_stopping> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:11,975[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <lr_monitor> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:11,976[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_summary> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:11,977[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_checkpoint> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:11,979[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <rich_progress_bar> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:11,979[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating loggers...[0m
+[[36m2026-09-29 19:16:11,979[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <tensorboard> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:11,981[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <csv> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:11,983[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating trainer <lightning.pytorch.trainer.Trainer>[0m
+Trainer already configured with model summary callbacks: [<class 'lightning.pytorch.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[[36m2026-09-29 19:16:12,049[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting training![0m
+You are using a CUDA device ('NVIDIA RTX A5000') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [2]
+┏━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃    ┃ Name                      ┃ Type               ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0  │ encoder_x                 │ BaseEncoder        │ 47.1 M │ train │     0 │
+│ 1  │ encoder_x.mlp             │ MLP                │ 46.1 M │ train │     0 │
+│ 2  │ encoder_x.mlp.network     │ Sequential         │ 46.1 M │ train │     0 │
+│ 3  │ encoder_x.mlp.network.0   │ Linear             │ 20.4 M │ train │     0 │
+│ 4  │ encoder_x.mlp.network.1   │ Linear             │ 12.8 M │ train │     0 │
+│ 5  │ encoder_x.mlp.network.2   │ LayerNorm          │      0 │ train │     0 │
+│ 6  │ encoder_x.mlp.network.3   │ ReLU               │      0 │ train │     0 │
+│ 7  │ encoder_x.mlp.network.4   │ Linear             │ 12.8 M │ train │     0 │
+│ 8  │ encoder_x.mu_x            │ Linear             │  458 K │ train │     0 │
+│ 9  │ encoder_x.var_x           │ Linear             │  458 K │ train │     0 │
+│ 10 │ encoder_e                 │ BaseEncoder        │ 53.2 M │ train │     0 │
+│ 11 │ encoder_e.mlp             │ MLP                │ 52.2 M │ train │     0 │
+│ 12 │ encoder_e.mlp.network     │ Sequential         │ 52.2 M │ train │     0 │
+│ 13 │ encoder_e.mlp.network.0   │ Linear             │  838 K │ train │     0 │
+│ 14 │ encoder_e.mlp.network.1   │ Linear             │ 12.8 M │ train │     0 │
+│ 15 │ encoder_e.mlp.network.2   │ LayerNorm          │      0 │ train │     0 │
+│ 16 │ encoder_e.mlp.network.3   │ ReLU               │      0 │ train │     0 │
+│ 17 │ encoder_e.mlp.network.4   │ Linear             │ 12.8 M │ train │     0 │
+│ 18 │ encoder_e.mlp.network.5   │ LayerNorm          │      0 │ train │     0 │
+│ 19 │ encoder_e.mlp.network.6   │ ReLU               │      0 │ train │     0 │
+│ 20 │ encoder_e.mlp.network.7   │ Linear             │ 12.8 M │ train │     0 │
+│ 21 │ encoder_e.mlp.network.8   │ LayerNorm          │      0 │ train │     0 │
+│ 22 │ encoder_e.mlp.network.9   │ ReLU               │      0 │ train │     0 │
+│ 23 │ encoder_e.mlp.network.10  │ Linear             │ 12.8 M │ train │     0 │
+│ 24 │ encoder_e.mu_x            │ Linear             │  458 K │ train │     0 │
+│ 25 │ encoder_e.var_x           │ Linear             │  458 K │ train │     0 │
+│ 26 │ decoder                   │ DeepIsotropicGaus… │ 46.1 M │ train │     0 │
+│ 27 │ decoder.network           │ MLP                │ 46.1 M │ train │     0 │
+│ 28 │ decoder.network.network   │ Sequential         │ 46.1 M │ train │     0 │
+│ 29 │ decoder.network.network.0 │ Linear             │  462 K │ train │     0 │
+│ 30 │ decoder.network.network.1 │ Linear             │ 12.8 M │ train │     0 │
+│ 31 │ decoder.network.network.2 │ LayerNorm          │      0 │ train │     0 │
+│ 32 │ decoder.network.network.3 │ ReLU               │      0 │ train │     0 │
+│ 33 │ decoder.network.network.4 │ Dropout            │      0 │ train │     0 │
+│ 34 │ decoder.network.network.5 │ Linear             │ 12.8 M │ train │     0 │
+│ 35 │ decoder.network.network.6 │ LayerNorm          │      0 │ train │     0 │
+│ 36 │ decoder.network.network.7 │ ReLU               │      0 │ train │     0 │
+│ 37 │ decoder.network.network.8 │ Dropout            │      0 │ train │     0 │
+│ 38 │ decoder.network.network.9 │ Linear             │ 20.0 M │ train │     0 │
+└────┴───────────────────────────┴────────────────────┴────────┴───────┴───────┘
+Trainable params: 146 M                                                         
+Non-trainable params: 0                                                         
+Total params: 146 M                                                             
+Total estimated model params size (MB): 585.474                                 
+Modules in train mode: 39                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+Epoch 268/499 ━━━━━━━━━━━━━━━ 246/246 0:00:26 •       9.33it/s v_num: 0         
+                                      0:00:00                  kld_step: 10.222 
+                                                               recon_loss_step: 
+                                                               427.350          
+                                                               elbo_step:       
+                                                               -437.572         
+                                                               val_kld_step:    
+                                                               11.174           
+                                                               val_kld_epoch:   
+                                                               10.631 val_loss: 
+                                                               456.525          
+                                                               kld_epoch: 9.815 
+                                                               recon_loss_epoch:
+                                                               411.907          
+                                                               elbo_epoch:      
+                                                               -421.722         
+[[36m2026-09-29 21:37:03,020[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting testing![0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+[[36m2026-09-29 21:37:03,477[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - test dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-29 21:37:04,890[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/train_test_split.csv[0m
+[[36m2026-09-29 21:37:04,900[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/perturbation_covariate_split_map.csv[0m
+Restoring states from the checkpoint path at /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/checkpoints/epoch=218-step=53874.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [2]
+Loaded model weights from the checkpoint at /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/checkpoints/epoch=218-step=53874.ckpt
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/anndata/_core/anndata.py:1882: UserWarning: Observation names are not unique. To make them unique, call `.obs_names_make_unique`.
+  utils.warn_names_duplicates("obs")
+... storing 'covariate_combo' as categorical
+... storing 'covariate_combo' as categorical
+model                    SparseAdditiveVAE
+rmse_average                       0.08663
+rmse_rank_average                  0.03043
+cosine_pca_average                 0.09984
+cosine_rank_pca_average            0.05459
+cosine_logfc                       0.47090
+cosine_rank_logfc                  0.02464
+r2_score_scores                   -0.04873
+top_k_recall_scores                0.00087
+mmd_pca                            1.97900
+mmd_rank_pca                       0.02850
+covariate                   k562
+rmse_average             0.08663
+rmse_rank_average        0.03043
+cosine_pca_average       0.09984
+cosine_rank_pca_average  0.05459
+cosine_logfc             0.47090
+cosine_rank_logfc        0.02464
+r2_score_scores         -0.04873
+top_k_recall_scores      0.00087
+mmd_pca                  1.97900
+mmd_rank_pca             0.02850
+[[36m2026-09-29 22:17:09,229[0m][[34mperturbench.modelcore.models.base[0m][[32mINFO[0m] - Launching cell-eval subprocess for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/evaluation//cell_eval/k562[0m
+[[36m2026-09-29 22:17:10,985[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - cell-eval subprocess failed (exit 1) for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-06_sams/evaluation//cell_eval/k562.
+stderr: Traceback (most recent call last):
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 45, in <module>
+    main()
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 27, in main
+    from cell_eval import MetricsEvaluator
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/__init__.py", line 1, in <module>
+    from ._baseline import build_base_mean_adata
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/_baseline.py", line 8, in <module>
+    from pdex import parallel_differential_expression
+ImportError: cannot import name 'parallel_differential_expression' from 'pdex' (/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/pdex/__init__.py)
+[0m
+[[36m2026-09-29 22:17:11,302[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - Skipping cell-eval metrics for covariate k562[0m
+model                    SparseAdditiveVAE
+rmse_average                       0.08663
+rmse_rank_average                  0.03043
+cosine_pca_average                 0.09984
+cosine_rank_pca_average            0.05459
+cosine_logfc                       0.47090
+cosine_rank_logfc                  0.02464
+r2_score_scores                   -0.04873
+top_k_recall_scores                0.00087
+mmd_pca                            1.97900
+mmd_rank_pca                       0.02850
+covariate                   k562
+rmse_average             0.08663
+rmse_rank_average        0.03043
+cosine_pca_average       0.09984
+cosine_rank_pca_average  0.05459
+cosine_logfc             0.47090
+cosine_rank_logfc        0.02464
+r2_score_scores         -0.04873
+top_k_recall_scores      0.00087
+mmd_pca                  1.97900
+mmd_rank_pca             0.02850
+Testing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5/5 0:00:08 • 0:00:00 0.62it/s 
