@@ -1,24 +1,17 @@
 import glob
 import os
-import re
 import sys
 
 import matplotlib
 matplotlib.use('Agg')
 
-import matplotlib.cm as cm
-import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import rankdata
 
 # ─────────────────────────────────────────────────────────────
 # config
 # ─────────────────────────────────────────────────────────────
-# rank 지표는 값이 0 근처에 몰려 있어 뒤집으면 전부 1에 붙는다.
-#   False = 절대 스케일 유지 (정직하지만 변별력 낮음)
-#   True  = 7개 모델 내 상대 순위로 재정규화 (변별력 높음, 의미는 '상대적')
-RELATIVE_RANK = False
-
 # perturbench 가 csv logger 에 남기는 metric 이름 ({metric}_{aggregation}, rank 는 {metric}_rank_{aggregation})
 metrics = [
     'rmse_average', 'rmse_rank_average',
@@ -36,26 +29,32 @@ short = [
     'MMD\nPCA', 'MMD rank\nPCA',
 ]
 
-# +1 = higher is better / -1 = lower is better (스케일링 후 뒤집음)
+# +1 = higher is better / -1 = lower is better
 DIRECTION = [-1, -1, +1, -1, +1, -1, +1, +1, -1, -1]
 
-UNBOUNDED = [0, 1, 8, 9]     # 이론적 상한 없음 -> robust(median/MAD) scaling
-RANK_IDX = [3, 5]            # 0~1 이지만 값이 0 근처에 몰린 rank 지표
-R2_IDX = 6
-
-# overall score 집계용 지표군: 같은 신호의 raw/rank 쌍(RMSE, cos PCA, cos logFC,
-# MMD)을 하나로 묶어 군 내 평균부터 낸 뒤 군끼리 평균한다.
-# 그냥 10개 지표를 통으로 평균 내면 raw/rank 쌍이 6/10을 차지해서 사실상
-# 같은 신호가 3번 중복 반영되고, R²·top-k recall 같은 단일 지표는
-# 1/10로 묻힌다.
-METRIC_GROUPS = {
-    'RMSE': [0, 1],
-    'cos_PCA': [2, 3],
-    'cos_logFC': [4, 5],
-    'R2': [6],
-    'top_k_recall': [7],
-    'MMD_PCA': [8, 9],
+# 평가 축: 성격이 다른 지표끼리는 한 숫자로 섞지 않고 축별로 따로 본다.
+#   Accuracy     : 예측 평균 발현이 실제와 얼마나 가까운가
+#   Specificity  : *_rank 지표. 예측이 다른 perturbation 이 아니라 자기
+#                  perturbation 의 실제값에 가장 가까운가 (Accuracy 와 다른 신호라
+#                  raw/rank 쌍으로 묶으면 서로 상쇄돼 정보가 사라짐)
+#   DEG recall   : 실제 top-k DEG 를 맞히는가
+#   Distribution : 단일세포 분포 수준에서 실제와 같은가
+AXES = {
+    'Accuracy':     [0, 2, 4, 6],
+    'Specificity':  [1, 3, 5, 9],
+    'DEG recall':   [7],
+    'Distribution': [8],
 }
+
+# 정규화 = 지표별 모델 간 순위 (1 = best, 동점은 평균 순위).
+# 예전 방식(일부 지표 robust scaling + 나머지 절대값 clip)은
+#   - 지표마다 실질 변별력이 달라 의도치 않은 가중치가 생기고
+#     (cos rank 는 1-x 하면 전부 0.9+ 로 붙어 사실상 상수)
+#   - median/MAD 가 비교 집합에 의존해 run 하나 추가/제거만 해도 다른 모델 점수가 변했다.
+# 순위는 스케일·이상치와 무관하고 모든 지표를 같은 무게로 다룬다. 차이의 '크기'는
+# 버려지므로 히트맵 셀에 원값을 같이 적는다.
+# 축 점수 = 축 안 지표들의 평균 순위. 축끼리 합친 overall 은 만들지 않는다
+# (축 간 trade-off 를 숫자 하나로 가리게 되고, 축 가중치를 정할 근거도 없음).
 
 # [Flow_Matching-MLP metric data]
 # 1. SiLU [source: noise]
@@ -63,7 +62,7 @@ METRIC_GROUPS = {
 # 2. SiLU + LayerNorm(input 정규화) [source: noise]
 #   -> [.313, .1879, .09682, .1535, .02615, .2692, -4.534, .08444, 4.342, .1793],
 # 3. SiLU + LayerNorm(input 정규화) [source: control]
-#   -> 
+#   ->
 
 # [Flow_Matching-Unet metric data]
 # 1. source: noise
@@ -76,7 +75,6 @@ METRIC_GROUPS = {
 # 비교할 run: 표시 이름 -> run 폴더 (train 한 번 = logs/train/runs/<날짜_시간> 하나)
 #   test metric 은 <run>/tensorboard/ 의 event 파일에서 자동으로 읽는다.
 #   어떤 run 이 있는지는 `python metric_each_model_graph.py --list` 로 확인.
-#   이름에 괄호를 붙이면 같은 family 로 묶여 색 농도로 구분됨. 예) PRiMeFlow(CFG=3.0)
 # ─────────────────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # RUNS 의 상대경로 기준 (PRiMeFlow 루트)
 RUN_ROOT = os.path.join(BASE_DIR, 'logs', 'train', 'runs')
@@ -97,8 +95,19 @@ RUNS = {
     'PRiMeFlow(Unet+gemb, CFG=5.0)': 'logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5',
 }
 
+# figure 1 (메인 비교): baseline + 대표 PRiMeFlow 한 개.
+#   순위는 비교 집합 안에서 매겨지므로 같은 모델의 변형을 여러 개 넣으면
+#   baseline 들의 순위가 변형 개수만큼 밀려 비교가 왜곡된다.
+MAIN_MODELS = [
+    'Linear_additive', 'Latent_additive', 'Decoder_only',
+    'CPA', 'SAMS_VAE', 'Biolord',
+    'PRiMeFlow(Unet+gemb, CFG=1.0)',
+]
+# figure 2 (ablation): PRiMeFlow 변형끼리만 순위를 매긴다.
+ABLATION_MODELS = [n for n in RUNS if n.startswith('PRiMeFlow')]
+
 # 예전 perturbench 버전에서 뽑아 손으로 옮겨 적은 값 (지금 버전과 split/평가 코드가
-# 달라 직접 비교 불가). 참고용으로만 남겨 둠. True 면 RUNS 결과와 같이 그림.
+# 달라 직접 비교 불가). 참고용으로만 남겨 둠. True 면 메인 비교에 같이 그림.
 INCLUDE_LEGACY = False
 
 LEGACY_MODELS = {
@@ -158,203 +167,240 @@ def list_runs():
             print(f"           {o}")
 
 
-if '--list' in sys.argv:
-    list_runs()
-    sys.exit(0)
+# ─────────────────────────────────────────────────────────────
+# normalize: 지표별 순위 (1 = best)
+# ─────────────────────────────────────────────────────────────
+def rank_matrix(raw):
+    """(모델, 지표) 원값 -> 지표별 순위. 방향을 맞춘 뒤 큰 값이 1위, 동점은 평균 순위."""
+    return np.stack([rankdata(-DIRECTION[i] * raw[:, i], method='average')
+                     for i in range(raw.shape[1])], axis=1)
 
-models = {name: load_run_metrics(os.path.join(BASE_DIR, d)) for name, d in RUNS.items()}
-if INCLUDE_LEGACY:
-    models = {**LEGACY_MODELS, **models}
-if len(models) < 2:
-    sys.exit("비교할 모델이 2개 이상 필요합니다. RUNS 에 run 폴더를 채우세요 "
-             "(`python metric_each_model_graph.py --list` 로 목록 확인).")
 
-palette = {
-    'Linear_additive': "#2097F9", 'Latent_additive': "#1DBF4A",
-    'Decoder_only': "#F99F20",    'CPA': "#F92720",
-    'SAMS_VAE': "#F92097",        'Biolord': "#A220F9",
-    'Flow_Matching-MLP': "#E1D830", 'Flow_Matching-Unet': "#23e4b7"
+def axis_scores(rk):
+    """지표 순위 -> 축별 평균 순위 (모델, 축)."""
+    return np.stack([rk[:, idxs].mean(axis=1) for idxs in AXES.values()], axis=1)
+# ─────────────────────────────────────────────────────────────
+# plotting
+# ─────────────────────────────────────────────────────────────
+INK, MUTED, GRID = '#222222', '#666666', '#E3E3E3'
+HIGHLIGHT, OTHER = '#C8102E', '#9A9A9A'
+
+
+def _is_primeflow(name):
+    return name.startswith('PRiMeFlow')
+
+
+def _model_order(names):
+    """행 순서: PRiMeFlow 를 맨 위로, 나머지는 RUNS 에 적은 순서 그대로 (순위로 재정렬하지 않음)."""
+    return sorted(range(len(names)), key=lambda i: (not _is_primeflow(names[i]), i))
+
+
+def plot_axis_summary(names, raw, title, path, highlight=True):
+    """발표용 요약: 축마다 패널 하나, 모델별 평균 순위를 점으로 (오른쪽일수록 좋음).
+    overall 점수는 일부러 만들지 않는다 (축 간 trade-off 를 숫자 하나로 가리지 않기 위해)."""
+    n = len(names)
+    per_axis = axis_scores(rank_matrix(raw))
+    order = _model_order(names)
+    y = np.arange(n)
+
+    fig, axes = plt.subplots(1, len(AXES), figsize=(3.4 * len(AXES) + 2.2, 1.0 + 0.48 * n),
+                             sharey=True, layout='constrained')
+    for j, (ax, (axis_name, idxs)) in enumerate(zip(axes, AXES.items())):
+        for row, m in enumerate(order):
+            v = per_axis[m, j]
+            hi = highlight and _is_primeflow(names[m])
+            c = HIGHLIGHT if (hi or not highlight) else OTHER
+            ax.hlines(row, n, v, color=c, lw=2, alpha=0.35, zorder=1)
+            ax.scatter(v, row, s=90 if hi else 60, color=c, zorder=3,
+                       edgecolor='white', linewidth=1.5)
+            ax.text(v - 0.22, row, f"{v:g}" if v == int(v) else f"{v:.1f}",
+                    va='center', ha='left', fontsize=10, color=INK,
+                    fontweight='bold' if hi else 'normal')
+
+        ax.set_xlim(n + 0.4, 0.4)        # 1위가 오른쪽
+        ax.set_xticks(range(n, 0, -1))
+        ax.set_ylim(n - 0.5, -0.5)
+        ax.grid(axis='x', color=GRID, lw=0.8)
+        ax.set_axisbelow(True)
+        ax.tick_params(length=0, labelsize=9.5, labelcolor=MUTED)
+        for sp in ['top', 'right', 'left']:
+            ax.spines[sp].set_visible(False)
+        ax.spines['bottom'].set_color(GRID)
+        sub = ', '.join(short[i].replace('\n', ' ') for i in idxs)
+        ax.set_title(f"{axis_name}\n", fontsize=13, fontweight='bold', color=INK, loc='left')
+        ax.text(0, 1.0, sub, transform=ax.transAxes, fontsize=9, color=MUTED, va='bottom')
+
+    axes[0].set_yticks(y)
+    axes[0].set_yticklabels([names[m] for m in order], fontsize=11, color=INK)
+    if highlight:
+        for lbl, m in zip(axes[0].get_yticklabels(), order):
+            if _is_primeflow(names[m]):
+                lbl.set_color(HIGHLIGHT)
+                lbl.set_fontweight('bold')
+
+    fig.suptitle(title, fontsize=15, fontweight='bold', color=INK)
+    fig.supxlabel(f"mean rank among {n} models  (1 = best, right = better)",
+                  fontsize=10, color=MUTED)
+    fig.savefig(path, dpi=160, bbox_inches='tight', facecolor='white')
+    plt.close(fig)
+
+
+def plot_metric_table(names, raw, title, path):
+    """부록용 상세: 색 = 지표별 순위(진할수록 좋음), 숫자 = 원값."""
+    n = len(names)
+    rk = rank_matrix(raw)
+    order = _model_order(names)
+    cols = [i for idxs in AXES.values() for i in idxs]
+    M = (n - rk[order][:, cols]) / (n - 1)      # 1위 = 1, 꼴찌 = 0
+    R = raw[order][:, cols]
+
+    fig, ax = plt.subplots(figsize=(13, 1.6 + 0.5 * n))
+    ax.imshow(M, cmap=plt.cm.Blues, vmin=-0.1, vmax=1.05, aspect='auto')
+    for r in range(n):
+        for c in range(len(cols)):
+            ax.text(c, r, f"{R[r, c]:.3g}", ha='center', va='center', fontsize=10,
+                    color='white' if M[r, c] > 0.55 else INK)
+
+    ax.set_xticks(range(len(cols)))
+    ax.set_xticklabels([f"{short[i]} {'↓' if DIRECTION[i] == -1 else '↑'}" for i in cols],
+                       fontsize=9.5)
+    ax.set_yticks(range(n))
+    ax.set_yticklabels([names[m] for m in order], fontsize=11)
+    ax.set_xticks(np.arange(-.5, len(cols), 1), minor=True)
+    ax.set_yticks(np.arange(-.5, n, 1), minor=True)
+    ax.grid(which='minor', color='white', lw=2)
+    ax.tick_params(which='both', length=0)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+
+    start = 0
+    for axis_name, idxs in AXES.items():   # 축 묶음 헤더 + 구분선
+        w = len(idxs)
+        ax.text(start + (w - 1) / 2, -0.7, axis_name.replace(' ', '\n') if w == 1 else axis_name,
+                ha='center', va='bottom', fontsize=10 if w == 1 else 11.5,
+                fontweight='bold', color=INK)
+        if start:
+            ax.axvline(start - 0.5, color='white', lw=6)
+        start += w
+
+    ax.set_title(title, fontsize=14, fontweight='bold', color=INK, pad=62)
+    ax.annotate(f"Number = raw value.  Colour = rank among {n} models on that metric (darker = better).",
+                xy=(0.5, 1.0), xycoords='axes fraction', xytext=(0, 40), textcoords='offset points',
+                ha='center', va='bottom', fontsize=9.5, color=MUTED)
+    fig.savefig(path, dpi=160, bbox_inches='tight', facecolor='white')
+    plt.close(fig)
+
+
+# ─────────────────────────────────────────────────────────────
+# export: 발표자료 제작용 데이터 (python metric_each_model_graph.py --export)
+# ─────────────────────────────────────────────────────────────
+EXPORT_DIR = os.path.join(BASE_DIR, 'presentation_data')
+
+METRIC_INFO = {   # metric -> 설명 (발표자료에서 지표를 소개할 때 쓰는 문구)
+    'rmse_average':            'Root mean squared error between predicted and observed mean expression per perturbation',
+    'rmse_rank_average':       'Rank of the true perturbation among all perturbations when ranked by RMSE to the prediction (normalized, 0 = perfect)',
+    'cosine_pca_average':      'Cosine similarity of predicted vs observed mean expression in PCA space',
+    'cosine_rank_pca_average': 'Rank version of cosine (PCA): is the prediction closest to its own perturbation? (normalized, 0 = perfect)',
+    'cosine_logfc':            'Cosine similarity of predicted vs observed log fold-change (vs control)',
+    'cosine_rank_logfc':       'Rank version of cosine (logFC) (normalized, 0 = perfect)',
+    'r2_score_scores':         'R² of predicted vs observed expression',
+    'top_k_recall_scores':     'Recall of the observed top-k differentially expressed genes among the predicted top-k',
+    'mmd_pca':                 'Maximum mean discrepancy between predicted and observed single-cell distributions in PCA space',
+    'mmd_rank_pca':            'Rank version of MMD (PCA) (normalized, 0 = perfect)',
 }
 
-# 팔레트에 없는 모델은 이름 접두어(괄호 앞부분)로 "family"를 묶어서
-# 한 색상 계열의 농도 그라데이션을 자동 배정한다.
-# 예: PRiMeFlow(CFG=1.0/3.0/5.0) -> Reds 계열로 CFG가 커질수록 진해짐.
-# 새 variant가 더 늘어나도 팔레트를 손으로 안 건드려도 되게 하기 위함.
-FAMILY_CMAPS = {
-    'PRiMeFlow': cm.Reds,
+MODEL_INFO = {    # 표시 이름 -> (group, 설명)
+    'Linear_additive': ('baseline', 'Adds per-gene perturbation effects linearly to control expression'),
+    'Latent_additive': ('baseline', 'Autoencoder; adds perturbation effects in a learned latent space'),
+    'Decoder_only':    ('baseline', 'Decoder from perturbation/covariate embeddings to expression, no encoder'),
+    'CPA':             ('baseline', 'Compositional Perturbation Autoencoder (Lotfollahi et al.)'),
+    'SAMS_VAE':        ('baseline', 'Sparse additive mechanism shift VAE'),
+    'Biolord':         ('baseline', 'Disentangled representation model (Piran et al.)'),
+    'PRiMeFlow(Unet, CFG=1.0)':
+        ('PRiMeFlow', 'Conditional flow matching in gene space, 1D U-Net velocity field (16 ch), no gene embedding'),
+    'PRiMeFlow(Unet+gemb, CFG=1.0)':
+        ('PRiMeFlow', 'Same U-Net + 16-dim learned gene embedding channel; 4-GPU DDP (effective batch 512); main PRiMeFlow model'),
+    'PRiMeFlow(Unet+gemb, CFG=3.0)':
+        ('PRiMeFlow', 'Same checkpoint as Unet+gemb (epoch 40), evaluated with classifier-free guidance weight 3.0'),
+    'PRiMeFlow(Unet+gemb, CFG=5.0)':
+        ('PRiMeFlow', 'Same checkpoint as Unet+gemb (epoch 40), evaluated with classifier-free guidance weight 5.0'),
 }
-DEFAULT_CMAP = cm.tab10
 
 
-def _family_of(name):
-    return re.split(r'[\(\[]', name)[0].strip()
+def export_data(models, main_names, out_dir=EXPORT_DIR):
+    """원값 / 지표별 순위 / 축별 평균 순위를 CSV 로, 그림을 figures/ 로 내보낸다."""
+    import shutil
+    import pandas as pd
+
+    os.makedirs(os.path.join(out_dir, 'figures'), exist_ok=True)
+    axis_of = {i: a for a, idxs in AXES.items() for i in idxs}
+    label = [s.replace('\n', ' ') for s in short]
+
+    pd.DataFrame({
+        'metric': metrics, 'label': label, 'axis': [axis_of[i] for i in range(len(metrics))],
+        'direction': ['lower_is_better' if d == -1 else 'higher_is_better' for d in DIRECTION],
+        'description': [METRIC_INFO[m] for m in metrics],
+    }).to_csv(os.path.join(out_dir, 'metrics_info.csv'), index=False)
+
+    pd.DataFrame([{
+        'model': n, 'group': MODEL_INFO.get(n, ('', ''))[0],
+        'in_main_comparison': n in main_names, 'in_ablation': n in ABLATION_MODELS,
+        'run_dir': RUNS.get(n, ''), 'description': MODEL_INFO.get(n, ('', ''))[1],
+    } for n in models]).to_csv(os.path.join(out_dir, 'models_info.csv'), index=False)
+
+    raw_all = pd.DataFrame([models[n] for n in models], index=list(models), columns=label)
+    raw_all.rename_axis('model').to_csv(os.path.join(out_dir, 'raw_metrics.csv'), float_format='%.4g')
+
+    long_rows = []
+    for tag, names in (('main', main_names), ('ablation', ABLATION_MODELS)):
+        raw = np.array([models[n] for n in names], dtype=float)
+        rk = rank_matrix(raw)
+        per_axis = axis_scores(rk)
+        pd.DataFrame(rk, index=names, columns=label).rename_axis('model') \
+            .to_csv(os.path.join(out_dir, f'{tag}_metric_ranks.csv'))
+        pd.DataFrame(per_axis.round(3), index=names, columns=list(AXES)).rename_axis('model') \
+            .to_csv(os.path.join(out_dir, f'{tag}_axis_ranks.csv'))
+        for r, n in enumerate(names):
+            for i in range(len(metrics)):
+                long_rows.append(dict(comparison=tag, model=n, metric=label[i], axis=axis_of[i],
+                                      direction=DIRECTION[i], value=raw[r, i], rank=rk[r, i],
+                                      n_models=len(names)))
+    pd.DataFrame(long_rows).to_csv(os.path.join(out_dir, 'metrics_long.csv'), index=False, float_format='%.4g')
+
+    for f in ('metric_summary.png', 'metric_ablation.png', 'metric_heatmap.png'):
+        if os.path.exists(os.path.join(BASE_DIR, f)):
+            shutil.copy(os.path.join(BASE_DIR, f), os.path.join(out_dir, 'figures', f))
+    print(f"exported -> {os.path.relpath(out_dir, BASE_DIR)}/")
 
 
-_families = {}
-for _n in models:
-    if _n not in palette:
-        _families.setdefault(_family_of(_n), []).append(_n)
+if __name__ == '__main__':
+    if '--list' in sys.argv:
+        list_runs()
+        sys.exit(0)
 
-for _fam, _members in _families.items():
-    _cmap = FAMILY_CMAPS.get(_fam, DEFAULT_CMAP)
-    _members = sorted(_members)
-    for _i, _n in enumerate(_members):
-        _t = 0.45 + 0.45 * (_i / max(len(_members) - 1, 1))
-        palette[_n] = mcolors.to_hex(_cmap(_t))
+    models = {name: load_run_metrics(os.path.join(BASE_DIR, d)) for name, d in RUNS.items()}
+    main_names = list(MAIN_MODELS)
+    if INCLUDE_LEGACY:
+        for k, v in LEGACY_MODELS.items():
+            models[f'{k} (legacy)'] = v
+            main_names.append(f'{k} (legacy)')
 
-# ─────────────────────────────────────────────────────────────
-# normalize: 모든 지표를 0~1, higher = better 로 통일
-# ─────────────────────────────────────────────────────────────
-names = list(models.keys())
-raw = np.array([models[n] for n in names], dtype=float)
-norm = raw.copy()
+    figures = [
+        (plot_axis_summary, main_names,
+         'PRiMeFlow vs. baselines (Norman19, test split)', 'metric_summary.png', {}),
+        (plot_metric_table, main_names,
+         'All metrics: PRiMeFlow vs. baselines', 'metric_heatmap.png', {}),
+        (plot_axis_summary, ABLATION_MODELS,
+         'PRiMeFlow ablation: gene embedding & CFG weight', 'metric_ablation.png',
+         dict(highlight=False)),
+    ]
+    for fn, names, title, path, kw in figures:
+        if len(names) < 2:
+            print(f"skip {path}: 비교할 모델이 2개 이상 필요합니다.")
+            continue
+        raw = np.array([models[n] for n in names], dtype=float)
+        fn(names, raw, title, path, **kw)
+        print(f"saved {path}")
 
-def robust_scale(col, clip=3.0):
-    """median/MAD 기반 0~1 정규화.
-    min-max는 값 하나가 극단적으로 튀면(outlier) 그 하나가 스케일의
-    양 끝을 정의해버려서 나머지 모델들이 좁은 구간으로 뭉개진다.
-    (예: MMD_PCA에서 PRiMeFlow만 ~19, 나머지는 1~3 -> min-max로는
-    나머지 모델들 간 실제 차이가 거의 안 보이게 됨)
-    median/MAD 기준으로 표준화한 뒤 ±clip 표준편차에서 잘라내면,
-    이상치는 스케일 끝단으로 clip되고 나머지 값들은 자기들끼리의
-    상대적 차이를 그대로 유지한다."""
-    med = np.median(col)
-    mad = np.median(np.abs(col - med)) * 1.4826   # 정규분포 하에서 std와 동일 스케일
-    if mad == 0:
-        lo, hi = col.min(), col.max()
-        return (col - lo) / (hi - lo) if hi > lo else np.full_like(col, 0.5)
-    z = np.clip((col - med) / mad, -clip, clip)
-    return (z + clip) / (2 * clip)
-
-
-minmax_cols = list(UNBOUNDED) + (RANK_IDX if RELATIVE_RANK else [])
-
-for i in range(len(metrics)):
-    if i in minmax_cols:
-        norm[:, i] = robust_scale(raw[:, i])
-    else:
-        norm[:, i] = np.clip(raw[:, i], 0, 1)   # r2 포함: 음수는 0, 상한 1
-
-for i, d in enumerate(DIRECTION):
-    if d == -1:
-        norm[:, i] = 1.0 - norm[:, i]
-
-group_score = np.stack(
-    [norm[:, idxs].mean(axis=1) for idxs in METRIC_GROUPS.values()], axis=1)
-score = group_score.mean(axis=1)                 # 지표군 평균의 평균 = overall score
-order = np.argsort(-score)                      # 종합 점수 내림차순
-
-labels = [f"{s}\n{'↓' if d == -1 else '↑'}" for s, d in zip(short, DIRECTION)]
-
-# ─────────────────────────────────────────────────────────────
-# figure 1: 모델별 개별 레이더 (small multiples)
-# ─────────────────────────────────────────────────────────────
-angles = np.linspace(0, 2 * np.pi, len(metrics), endpoint=False).tolist()
-angles += angles[:1]
-
-best = norm.max(axis=0).tolist()                # 지표별 최고 성능 = 기준선
-best += best[:1]
-
-n_models = len(names)
-ncols = 3
-nrows = int(np.ceil((n_models + 1) / ncols))   # +1 = 범례 칸
-cell = 5.7   # 모델 수가 늘어도 레이더 패널 하나의 크기는 고정
-fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * cell, nrows * cell),
-                         subplot_kw=dict(polar=True), layout='constrained')
-fig.get_layout_engine().set(hspace=0.14, wspace=0.10)   # 타이틀 충돌 방지
-axes = axes.ravel()
-
-for ax_i, m_i in enumerate(order):
-    ax = axes[ax_i]
-    n = names[m_i]
-    v = norm[m_i].tolist()
-    v += v[:1]
-
-    ax.fill(angles, best, color="#BBBBBB", alpha=0.22, zorder=1)
-    ax.plot(angles, best, color="#999999", lw=0.8, ls='--', zorder=2)
-
-    ax.plot(angles, v, color=palette[n], lw=2, zorder=3)
-    ax.fill(angles, v, color=palette[n], alpha=0.35, zorder=3)
-
-    ax.set_ylim(0, 1)
-    ax.set_yticks([0.25, 0.5, 0.75, 1.0])
-    ax.set_yticklabels([])
-    ax.set_xticks(angles[:-1])
-    ax.set_xticklabels(labels, fontsize=8.5)
-    ax.tick_params(axis='x', pad=6)
-    ax.grid(color="#DDDDDD", lw=0.7)
-    ax.spines['polar'].set_color("#CCCCCC")
-    ax.set_title(f"{ax_i+1}. {n}\noverall {score[m_i]:.3f}",
-                 fontsize=13, color=palette[n], fontweight='bold', pad=22)
-
-legend_ax = axes[n_models]        # ← axes[-1] 금지 (그게 8번째 모델을 덮어썼던 원인)
-legend_ax.axis('off')
-legend_ax.set_title("How to read", fontsize=13, fontweight='bold', pad=18)
-legend_ax.text(0.5, 0.45,
-               "- Farther out = better\n"
-               "- Dashed grey = best value\n"
-               "   achieved on each metric\n"
-               "- (down arrow) = lower-is-better\n"
-               "   metric, axis flipped\n"
-               "- Panels sorted by overall score\n"
-               "- Overall = mean of 6 metric-group\n"
-               "   means (RMSE, cos PCA, cos logFC,\n"
-               "   MMD, R², top-k recall), each\n"
-               "   robust-scaled (median/MAD)",
-               transform=legend_ax.transAxes, ha='center', va='center',
-               fontsize=11.5, linespacing=1.9)
-
-for j in range(n_models + 1, len(axes)):   # 9칸 중 남는 칸 숨김
-    axes[j].axis('off')
-
-fig.suptitle("Per-model performance profile - wider is better", fontsize=19, fontweight='bold', y=0.98)
-fig.tight_layout(rect=[0, 0, 1, 0.95])
-fig.savefig('metric_radar.png', dpi=140, bbox_inches='tight', facecolor='white')
-
-# ─────────────────────────────────────────────────────────────
-# figure 2: 히트맵 (색 = 정규화 점수, 숫자 = 원본 값) + 종합 점수 막대
-# ─────────────────────────────────────────────────────────────
-heatmap_h = max(6, 1.4 + 0.62 * n_models)   # 모델(행) 수에 맞춰 세로로 늘어남
-fig2, (axh, axb) = plt.subplots(
-    1, 2, figsize=(16, heatmap_h), gridspec_kw=dict(width_ratios=[5, 1], wspace=0.05))
-
-M = norm[order]
-R = raw[order]
-row_names = [names[i] for i in order]
-
-axh.imshow(M, cmap='YlGnBu', vmin=0, vmax=1, aspect='auto')
-
-axh.set_xticks(range(len(metrics)))
-axh.set_xticklabels([f"{s}\n{'↓' if d == -1 else '↑'}" for s, d in zip(short, DIRECTION)],
-                    fontsize=9)
-axh.set_yticks(range(len(row_names)))
-axh.set_yticklabels(row_names, fontsize=11)
-axh.set_xticks(np.arange(-.5, len(metrics), 1), minor=True)
-axh.set_yticks(np.arange(-.5, len(row_names), 1), minor=True)
-axh.grid(which='minor', color='white', lw=2)
-axh.tick_params(which='minor', length=0)
-
-for r in range(M.shape[0]):
-    for c in range(M.shape[1]):
-        axh.text(c, r, f"{R[r, c]:.3g}", ha='center', va='center', fontsize=8.5,
-                 color='white' if M[r, c] > 0.6 else '#222222')
-
-axh.set_title("Raw metric values  (colour = normalized score, darker = better)",
-              fontsize=14, fontweight='bold', pad=14)
-
-s_sorted = score[order]
-bars = axb.barh(range(len(row_names)), s_sorted,
-                color=[palette[n] for n in row_names], alpha=0.85)
-axb.set_ylim(len(row_names) - 0.5, -0.5)
-axb.set_xlim(0, 1)
-axb.set_yticks([])
-axb.set_xlabel("overall score", fontsize=11)
-axb.set_title("Overall\n(6-group mean)", fontsize=14, fontweight='bold', pad=14)
-for b, s in zip(bars, s_sorted):
-    axb.text(min(s + 0.03, 0.97), b.get_y() + b.get_height() / 2,
-             f"{s:.3f}", va='center', fontsize=10, fontweight='bold')
-for sp in ['top', 'right']:
-    axb.spines[sp].set_visible(False)
-
-fig2.savefig('metric_heatmap.png', dpi=140, bbox_inches='tight', facecolor='white')
-print("saved")
+    if '--export' in sys.argv:
+        export_data(models, main_names)

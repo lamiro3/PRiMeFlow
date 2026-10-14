@@ -1,0 +1,11 @@
+model,group,in_main_comparison,in_ablation,run_dir,description
+Linear_additive,baseline,True,False,logs/train/runs/2026-09-29_20-25-04_linear,Adds per-gene perturbation effects linearly to control expression
+Latent_additive,baseline,True,False,logs/train/runs/2026-09-29_19-16-08_latent,Autoencoder; adds perturbation effects in a learned latent space
+Decoder_only,baseline,True,False,logs/train/runs/2026-09-29_23-14-02_decoder,"Decoder from perturbation/covariate embeddings to expression, no encoder"
+CPA,baseline,True,False,logs/train/runs/2026-09-29_19-16-02_cpa,Compositional Perturbation Autoencoder (Lotfollahi et al.)
+SAMS_VAE,baseline,True,False,logs/train/runs/2026-09-29_19-16-06_sams,Sparse additive mechanism shift VAE
+Biolord,baseline,True,False,logs/train/runs/2026-09-29_19-16-04_biolord,Disentangled representation model (Piran et al.)
+"PRiMeFlow(Unet, CFG=1.0)",PRiMeFlow,False,True,logs/train/runs/2026-09-29_20-15-34_primeflow-unet,"Conditional flow matching in gene space, 1D U-Net velocity field (16 ch), no gene embedding"
+"PRiMeFlow(Unet+gemb, CFG=1.0)",PRiMeFlow,True,True,logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb,Same U-Net + 16-dim learned gene embedding channel; 4-GPU DDP (effective batch 512); main PRiMeFlow model
+"PRiMeFlow(Unet+gemb, CFG=3.0)",PRiMeFlow,False,True,logs/train/runs/2026-09-30_10-34-58_primeflow-unet-gemb-cfg3,"Same checkpoint as Unet+gemb (epoch 40), evaluated with classifier-free guidance weight 3.0"
+"PRiMeFlow(Unet+gemb, CFG=5.0)",PRiMeFlow,False,True,logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5,"Same checkpoint as Unet+gemb (epoch 40), evaluated with classifier-free guidance weight 5.0"

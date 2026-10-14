@@ -1,0 +1,11 @@
+metric,label,axis,direction,description
+rmse_average,RMSE,Accuracy,lower_is_better,Root mean squared error between predicted and observed mean expression per perturbation
+rmse_rank_average,RMSE rank,Specificity,lower_is_better,"Rank of the true perturbation among all perturbations when ranked by RMSE to the prediction (normalized, 0 = perfect)"
+cosine_pca_average,cos PCA,Accuracy,higher_is_better,Cosine similarity of predicted vs observed mean expression in PCA space
+cosine_rank_pca_average,cos rank PCA,Specificity,lower_is_better,"Rank version of cosine (PCA): is the prediction closest to its own perturbation? (normalized, 0 = perfect)"
+cosine_logfc,cos logFC,Accuracy,higher_is_better,Cosine similarity of predicted vs observed log fold-change (vs control)
+cosine_rank_logfc,cos rank logFC,Specificity,lower_is_better,"Rank version of cosine (logFC) (normalized, 0 = perfect)"
+r2_score_scores,R²,Accuracy,higher_is_better,R² of predicted vs observed expression
+top_k_recall_scores,top-k recall,DEG recall,higher_is_better,Recall of the observed top-k differentially expressed genes among the predicted top-k
+mmd_pca,MMD PCA,Distribution,lower_is_better,Maximum mean discrepancy between predicted and observed single-cell distributions in PCA space
+mmd_rank_pca,MMD rank PCA,Specificity,lower_is_better,"Rank version of MMD (PCA) (normalized, 0 = perfect)"
