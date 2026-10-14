@@ -1,0 +1,308 @@
+Seed set to 245
+[[36m2026-09-29 19:16:02,247[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/datasplitter.py:604: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for covariates, df in self.obs_dataframe.groupby(self.covariate_keys):
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+           train  val  test
+('k562',)    146   46    47
+[[36m2026-09-29 19:16:05,595[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - val dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-29 19:16:06,814[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/train_test_split.csv[0m
+[[36m2026-09-29 19:16:06,823[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-29 19:16:06,823[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating model <perturbench.modelcore.models.CPA>[0m
+[[36m2026-09-29 19:16:08,246[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating callbacks...[0m
+[[36m2026-09-29 19:16:08,246[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <early_stopping> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:08,247[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <lr_monitor> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:08,248[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_summary> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:08,249[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_checkpoint> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:08,251[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <rich_progress_bar> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:08,252[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating loggers...[0m
+[[36m2026-09-29 19:16:08,252[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <tensorboard> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:08,254[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <csv> of type <DictConfig>[0m
+[[36m2026-09-29 19:16:08,255[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating trainer <lightning.pytorch.trainer.Trainer>[0m
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/lightning/fabric/connector.py:571: `precision=16` is supported for historical reasons but its usage is discouraged. Please set your precision to 16-mixed instead!
+Using 16bit Automatic Mixed Precision (AMP)
+Trainer already configured with model summary callbacks: [<class 'lightning.pytorch.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[[36m2026-09-29 19:16:08,497[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting training![0m
+You are using a CUDA device ('NVIDIA RTX A5000') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py:242: Precision 16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+┏━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┓
+┃    ┃ Name                                        ┃ Type ┃ Par… ┃ Mode ┃ FLO… ┃
+┡━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━┩
+│ 0  │ adv_loss_drugs                              │ Cro… │    0 │ tra… │    0 │
+│ 1  │ adv_loss_fn                                 │ Cro… │    0 │ tra… │    0 │
+│ 2  │ encoder                                     │ Var… │ 30.5 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 3  │ encoder.network                             │ Seq… │ 29.6 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 4  │ encoder.network.0                           │ Lin… │ 18.6 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 5  │ encoder.network.1                           │ Lay… │  6.7 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 6  │ encoder.network.2                           │ ReLU │    0 │ tra… │    0 │
+│ 7  │ encoder.network.3                           │ Dro… │    0 │ tra… │    0 │
+│ 8  │ encoder.network.4                           │ Lin… │ 11.1 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 9  │ encoder.network.5                           │ Lay… │  6.7 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 10 │ encoder.network.6                           │ ReLU │    0 │ tra… │    0 │
+│ 11 │ encoder.network.7                           │ Dro… │    0 │ tra… │    0 │
+│ 12 │ encoder.mu_x                                │ Lin… │  426 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 13 │ encoder.var_x                               │ Lin… │  426 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 14 │ decoder                                     │ Dee… │ 30.1 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 15 │ decoder.network                             │ MLP  │ 30.1 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 16 │ decoder.network.network                     │ Seq… │ 30.1 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 17 │ decoder.network.network.0                   │ Lin… │  429 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 18 │ decoder.network.network.1                   │ Lin… │ 11.1 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 19 │ decoder.network.network.2                   │ Lay… │    0 │ tra… │    0 │
+│ 20 │ decoder.network.network.3                   │ ReLU │    0 │ tra… │    0 │
+│ 21 │ decoder.network.network.4                   │ Dro… │    0 │ tra… │    0 │
+│ 22 │ decoder.network.network.5                   │ Lin… │ 18.6 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 23 │ pert_network                                │ MLP  │ 22.9 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 24 │ pert_network.network                        │ Seq… │ 22.9 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 25 │ pert_network.network.0                      │ Lin… │  352 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 26 │ pert_network.network.1                      │ Lin… │ 11.1 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 27 │ pert_network.network.2                      │ Lay… │    0 │ tra… │    0 │
+│ 28 │ pert_network.network.3                      │ ReLU │    0 │ tra… │    0 │
+│ 29 │ pert_network.network.4                      │ Dro… │    0 │ tra… │    0 │
+│ 30 │ pert_network.network.5                      │ Lin… │ 11.1 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 31 │ pert_network.network.6                      │ Lay… │    0 │ tra… │    0 │
+│ 32 │ pert_network.network.7                      │ ReLU │    0 │ tra… │    0 │
+│ 33 │ pert_network.network.8                      │ Dro… │    0 │ tra… │    0 │
+│ 34 │ pert_network.network.9                      │ Lin… │  426 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 35 │ perturbation_adversary_classifier           │ MLP  │  1.4 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 36 │ perturbation_adversary_classifier.network   │ Seq… │  1.4 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 37 │ perturbation_adversary_classifier.network.0 │ Lin… │  100 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 38 │ perturbation_adversary_classifier.network.1 │ Lin… │  602 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 39 │ perturbation_adversary_classifier.network.2 │ Lay… │    0 │ tra… │    0 │
+│ 40 │ perturbation_adversary_classifier.network.3 │ ReLU │    0 │ tra… │    0 │
+│ 41 │ perturbation_adversary_classifier.network.4 │ Dro… │    0 │ tra… │    0 │
+│ 42 │ perturbation_adversary_classifier.network.5 │ Lin… │  602 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 43 │ perturbation_adversary_classifier.network.6 │ Lay… │    0 │ tra… │    0 │
+│ 44 │ perturbation_adversary_classifier.network.7 │ ReLU │    0 │ tra… │    0 │
+│ 45 │ perturbation_adversary_classifier.network.8 │ Dro… │    0 │ tra… │    0 │
+│ 46 │ perturbation_adversary_classifier.network.9 │ Lin… │ 81.6 │ tra… │    0 │
+│    │                                             │      │    K │      │      │
+│ 47 │ covars_embeddings                           │ Mod… │    0 │ tra… │    0 │
+│ 48 │ covars_adversary_classifiers                │ Mod… │    0 │ tra… │    0 │
+│ 49 │ generative_modules                          │ Mod… │ 83.5 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+│ 50 │ adversary_modules                           │ Mod… │  1.4 │ tra… │    0 │
+│    │                                             │      │    M │      │      │
+└────┴─────────────────────────────────────────────┴──────┴──────┴──────┴──────┘
+Trainable params: 84.9 M                                                        
+Non-trainable params: 0                                                         
+Total params: 84.9 M                                                            
+Total estimated model params size (MB): 339.572                                 
+Modules in train mode: 51                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+Epoch 397/499 ━━━━━━━━━━━━━━━━ 16/16 0:00:02 •        8.82it/s v_num: 0         
+                                     0:00:00                   train_total_loss:
+                                                               449.991          
+                                                               train_recon_loss:
+                                                               464.172          
+                                                               train_kl_loss:   
+                                                               0.206            
+                                                               train_adv_loss:  
+                                                               4.795            
+                                                               train_covariate_…
+                                                               0.000            
+                                                               train_perturbati…
+                                                               4.795            
+                                                               train_penalty_ad…
+                                                               0.000            
+                                                               train_penalty_co…
+                                                               0.000            
+                                                               train_penalty_pe…
+                                                               0.000            
+                                                               train_acc_perts: 
+                                                               0.010 val_loss:  
+                                                               479.293          
+[[36m2026-09-29 19:46:04,597[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting testing![0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+[[36m2026-09-29 19:46:05,209[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - test dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-29 19:46:06,519[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/train_test_split.csv[0m
+[[36m2026-09-29 19:46:06,527[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/perturbation_covariate_split_map.csv[0m
+Restoring states from the checkpoint path at /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/checkpoints/epoch=347-step=5568.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/checkpoints/epoch=347-step=5568.ckpt
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/scanpy/tools/_rank_genes_groups.py:484: RuntimeWarning: invalid value encountered in log2
+  self.stats[group_name, "logfoldchanges"] = np.log2(
+... storing 'covariate_combo' as categorical
+... storing 'covariate_combo' as categorical
+model                        CPA
+rmse_average             0.04773
+rmse_rank_average        0.02560
+cosine_pca_average       0.82530
+cosine_rank_pca_average  0.02995
+cosine_logfc             0.74850
+cosine_rank_logfc        0.01981
+r2_score_scores          0.09926
+top_k_recall_scores      0.05043
+mmd_pca                  2.24200
+mmd_rank_pca             0.04879
+covariate                   k562
+rmse_average             0.04773
+rmse_rank_average        0.02560
+cosine_pca_average       0.82530
+cosine_rank_pca_average  0.02995
+cosine_logfc             0.74850
+cosine_rank_logfc        0.01981
+r2_score_scores          0.09926
+top_k_recall_scores      0.05043
+mmd_pca                  2.24200
+mmd_rank_pca             0.04879
+[[36m2026-09-29 20:24:53,892[0m][[34mperturbench.modelcore.models.base[0m][[32mINFO[0m] - Launching cell-eval subprocess for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/evaluation//cell_eval/k562[0m
+[[36m2026-09-29 20:24:55,181[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - cell-eval subprocess failed (exit 1) for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_19-16-02_cpa/evaluation//cell_eval/k562.
+stderr: Traceback (most recent call last):
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 45, in <module>
+    main()
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 27, in main
+    from cell_eval import MetricsEvaluator
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/__init__.py", line 1, in <module>
+    from ._baseline import build_base_mean_adata
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/_baseline.py", line 8, in <module>
+    from pdex import parallel_differential_expression
+ImportError: cannot import name 'parallel_differential_expression' from 'pdex' (/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/pdex/__init__.py)
+[0m
+[[36m2026-09-29 20:24:55,514[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - Skipping cell-eval metrics for covariate k562[0m
+model                        CPA
+rmse_average             0.04773
+rmse_rank_average        0.02560
+cosine_pca_average       0.82530
+cosine_rank_pca_average  0.02995
+cosine_logfc             0.74850
+cosine_rank_logfc        0.01981
+r2_score_scores          0.09926
+top_k_recall_scores      0.05043
+mmd_pca                  2.24200
+mmd_rank_pca             0.04879
+covariate                   k562
+rmse_average             0.04773
+rmse_rank_average        0.02560
+cosine_pca_average       0.82530
+cosine_rank_pca_average  0.02995
+cosine_logfc             0.74850
+cosine_rank_logfc        0.01981
+r2_score_scores          0.09926
+top_k_recall_scores      0.05043
+mmd_pca                  2.24200
+mmd_rank_pca             0.04879
+Testing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1/1 0:00:02 • 0:00:00 0.00it/s 

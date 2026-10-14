@@ -1,0 +1,36 @@
+# model/Primeflow.yaml  (perturbench 밖, PRiMeFlow/model 에 둔 설정)
+# 사용 (PRiMeFlow 루트에서):
+#   PYTHONPATH=$PWD train experiment=... model=Primeflow \
+#       'hydra.searchpath=[file://'$PWD']' trainer.precision=32
+_target_: model.Primeflow.PrimeFlow
+
+# 데이터에서 자동 주입 (null 로 두면 datamodule 이 채움)
+n_genes: null
+n_perts: null
+
+# flow matching
+time_dim: 128
+sigma: 0.0
+n_ode_steps: 100
+
+# CFG (classifier-free guidance)
+p_uncond: 0.1          # 학습 시 condition drop 확률
+cfg_weight: 1.0        # 추론 시 guidance 강도 (1=off). 재학습 없이 값만 바꿔 평가 가능
+
+# 아키텍처: 먼저 mlp 로 검증 → 잘 되면 unet
+architecture: mlp
+hidden_dim: 1024
+unet_channels: 32
+unet_channel_mult: [1, 2, 4, 8]
+unet_num_res_blocks: 2
+unet_gene_emb_dim: 16   # 유전자 임베딩 채널 (conv 가 유전자를 구분하게 함, 0=끔)
+
+# 기타
+use_ode_predict: True
+inject_covariates: True
+predict_chunk: 512     # 추론 청크 크기 (평가 OOM 방지)
+pred_clip_max: 12.0
+
+# optimizer
+lr: 1e-3
+wd: 1e-5

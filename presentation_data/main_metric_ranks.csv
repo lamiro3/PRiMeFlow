@@ -1,0 +1,8 @@
+model,RMSE,RMSE rank,cos PCA,cos rank PCA,cos logFC,cos rank logFC,R²,top-k recall,MMD PCA,MMD rank PCA
+Linear_additive,7.0,6.0,5.0,5.0,7.0,6.0,4.0,7.0,3.0,6.0
+Latent_additive,1.0,1.0,1.0,1.0,1.0,1.0,6.0,5.5,6.0,1.0
+Decoder_only,2.0,2.0,2.0,2.0,3.0,3.0,2.0,2.0,7.0,2.0
+CPA,3.0,3.0,3.0,3.0,2.0,2.0,3.0,3.0,5.0,5.0
+SAMS_VAE,5.0,5.0,6.0,6.0,5.0,4.0,5.0,4.0,4.0,3.0
+Biolord,6.0,4.0,7.0,4.0,6.0,5.0,7.0,5.5,2.0,4.0
+"PRiMeFlow(Unet+gemb, CFG=1.0)",4.0,7.0,4.0,7.0,4.0,7.0,1.0,1.0,1.0,7.0

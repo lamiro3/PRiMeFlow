@@ -1,0 +1,30 @@
+# @package _global_
+
+# PRiMeFlow norman19 실험 — baseline(neurips2025/norman19/*_best_params_norman19)과
+# 데이터 / split / seed / 평가 파이프라인을 동일하게 맞춘 설정.
+# 모델 하이퍼파라미터(lr, wd 포함)는 model/Primeflow.yaml 한 곳에서만 관리한다.
+# (baseline experiment 를 빌려 쓰면 그 모델의 lr/wd 가 PrimeFlow 에 섞여 들어감)
+#
+# 실행 (PRiMeFlow 루트에서):
+#   PYTHONPATH=$PWD train experiment=primeflow/norman19 "hydra.searchpath=[file://$PWD]"
+#   U-Net : 위 명령 + model.architecture=unet data.loader.batch_size=64
+
+defaults:
+  - override /model: Primeflow
+  - override /data: norman19
+  - override /data/evaluation: final_test
+
+# ↓ baseline 과 반드시 같아야 하는 값 (split 이 seed + splitter 로 결정됨)
+seed: 245
+
+data:
+  splitter:
+    max_heldout_fraction_per_covariate: 0.7
+
+trainer:
+  min_epochs: 5
+  max_epochs: 500
+  precision: 32      # fp16 에서 nan 발생 이력
+
+paths:
+  data_dir: ${paths.work_dir}/data   # PRiMeFlow/data

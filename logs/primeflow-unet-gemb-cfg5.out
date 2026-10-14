@@ -1,0 +1,103 @@
+Seed set to 245
+[test_primeflow] ckpt=logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/checkpoints/epoch=40-step=5043.ckpt | override={'cfg_weight': 5.0}
+[[36m2026-09-30 10:35:01,726[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/datasplitter.py:604: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for covariates, df in self.obs_dataframe.groupby(self.covariate_keys):
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+           train  val  test
+('k562',)    146   46    47
+[[36m2026-09-30 10:35:04,516[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - val dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-30 10:35:05,685[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5/train_test_split.csv[0m
+[[36m2026-09-30 10:35:05,693[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 10:35:05,693[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating model <model.Primeflow.PrimeFlow>[0m
+[[36m2026-09-30 10:35:06,078[0m][[34mperturbench.modelcore.train[0m][[33mWARNING[0m] - 45 perturbation(s) in val split are not in the pretrained encoder and will fail during evaluation: {'CEBPE+SPI1', 'JUN+CEBPB', 'PTPN12+ZBTB25', 'LYL1+IER5L', 'PTPN12+PTPN9', 'BPGM+ZBTB1', 'CBL+UBASH3A', 'SAMD1+UBASH3B', 'FOXL2+MEIS1', 'FOXA1+FOXL2', 'MAPK1+PRTG', 'FOXL2NB+FOXL2', 'FOXA1+HOXB9', 'CEBPE+PTPN12', 'ETS2+MAPK1', 'AHR+FEV', 'CDKN1C+CDKN1A', 'DUSP9+IGDCC3', 'MAP2K3+IKZF3', 'CEBPE+CEBPA', 'ZBTB10+MIDEAS', 'FOXF1+FOXL2', 'KLF1+MAP2K6', 'FOXF1+HOXB9', 'SAMD1+TGFBR2', 'CEBPB+PTPN12', 'SNAI1+UBASH3B', 'DUSP9+PRTG', 'TGFBR2+ETS2', 'RHOXF2+ZBTB25', 'MAP2K3+MAP2K6', 'IRF1+SET', 'DUSP9+ETS2', 'CEBPB+OSR2', 'SGK1+TBX3', 'KLF1+FOXA1', 'DUSP9+MAPK1', 'SET+CEBPE', 'FOXA3+FOXF1', 'PLK4+STIL', 'SAMD1+ZBTB1', 'UBASH3B+CNN1', 'ZC3HAV1+CEBPA', 'PRDM1+CBFA2T3', 'UBASH3B+PTPN9'}[0m
+[[36m2026-09-30 10:35:06,081[0m][[34mperturbench.modelcore.train[0m][[33mWARNING[0m] - 46 perturbation(s) in test split are not in the pretrained encoder and will fail during evaluation: {'TGFBR2+IGDCC3', 'CBL+CNN1', 'AHR+KLF1', 'FEV+MAP7D1', 'TGFBR2+CBARP', 'TBX3+TBX2', 'KIF18B+KIF2C', 'IGDCC3+MAPK1', 'MAP2K6+SPI1', 'MAPK1+TGFBR2', 'BCL2L11+BAK1', 'CDKN1C+CDKN1B', 'TGFBR2+PRTG', 'IGDCC3+PRTG', 'CNN1+MAPK1', 'FOXA3+HOXB9', 'ETS2+CEBPE', 'CEBPE+CNN1', 'UBASH3B+PTPN12', 'JUN+CEBPA', 'CEBPE+CEBPB', 'MAP2K3+SLC38A2', 'ETS2+CNN1', 'MAP2K3+MIDEAS', 'LHX1+MIDEAS', 'FOXA1+FOXF1', 'BPGM+SAMD1', 'POU3F2+FOXL2', 'ETS2+IGDCC3', 'ZBTB10+PTPN12', 'CEBPB+MAPK1', 'CBL+PTPN12', 'CBL+TGFBR2', 'ZBTB10+SNAI1', 'POU3F2+CBFA2T3', 'FOSB+UBASH3B', 'FEV+CBFA2T3', 'UBASH3B+OSR2', 'ZC3HAV1+CEBPE', 'PTPN12+UBASH3A', 'CNN1+UBASH3A', 'SGK1+S1PR2', 'KLF1+CEBPA', 'FOXA3+FOXL2', 'SGK1+TBX2', 'DUSP9+SNAI1'}[0m
+[[36m2026-09-30 10:35:06,081[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating callbacks...[0m
+[[36m2026-09-30 10:35:06,082[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <early_stopping> of type <DictConfig>[0m
+[[36m2026-09-30 10:35:06,082[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <lr_monitor> of type <DictConfig>[0m
+[[36m2026-09-30 10:35:06,083[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_summary> of type <DictConfig>[0m
+[[36m2026-09-30 10:35:06,084[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_checkpoint> of type <DictConfig>[0m
+[[36m2026-09-30 10:35:06,086[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <rich_progress_bar> of type <DictConfig>[0m
+[[36m2026-09-30 10:35:06,086[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating loggers...[0m
+[[36m2026-09-30 10:35:06,086[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <tensorboard> of type <DictConfig>[0m
+[[36m2026-09-30 10:35:06,088[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <csv> of type <DictConfig>[0m
+[[36m2026-09-30 10:35:06,089[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating trainer <lightning.pytorch.trainer.Trainer>[0m
+Trainer already configured with model summary callbacks: [<class 'lightning.pytorch.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[[36m2026-09-30 10:35:06,135[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting testing![0m
+You are using a CUDA device ('NVIDIA RTX A5000') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+[[36m2026-09-30 10:35:06,760[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - test dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-30 10:35:08,010[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5/train_test_split.csv[0m
+[[36m2026-09-30 10:35:08,018[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5/perturbation_covariate_split_map.csv[0m
+Restoring states from the checkpoint path at logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/checkpoints/epoch=40-step=5043.ckpt
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:566: The dirpath has changed from '/data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/checkpoints' to '/data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5/checkpoints', therefore `best_model_score`, `kth_best_model_path`, `kth_value`, `last_model_path` and `best_k_models` won't be reloaded. Only `best_model_path` will be reloaded.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [1]
+Loaded model weights from the checkpoint at logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/checkpoints/epoch=40-step=5043.ckpt
+... storing 'covariate_combo' as categorical
+... storing 'covariate_combo' as categorical
+model                    PrimeFlow
+rmse_average                0.1966
+rmse_rank_average           0.3884
+cosine_pca_average          0.6238
+cosine_rank_pca_average     0.1101
+cosine_logfc                0.5579
+cosine_rank_logfc           0.1353
+r2_score_scores             0.1677
+top_k_recall_scores         0.3578
+mmd_pca                     6.0840
+mmd_rank_pca                0.3647
+covariate                  k562
+rmse_average             0.1966
+rmse_rank_average        0.3884
+cosine_pca_average       0.6238
+cosine_rank_pca_average  0.1101
+cosine_logfc             0.5579
+cosine_rank_logfc        0.1353
+r2_score_scores          0.1677
+top_k_recall_scores      0.3578
+mmd_pca                  6.0840
+mmd_rank_pca             0.3647
+[[36m2026-09-30 12:04:36,261[0m][[34mperturbench.modelcore.models.base[0m][[32mINFO[0m] - Launching cell-eval subprocess for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5/evaluation//cell_eval/k562[0m
+[[36m2026-09-30 12:04:37,781[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - cell-eval subprocess failed (exit 1) for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_10-35-01_primeflow-unet-gemb-cfg5/evaluation//cell_eval/k562.
+stderr: Traceback (most recent call last):
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 45, in <module>
+    main()
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 27, in main
+    from cell_eval import MetricsEvaluator
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/__init__.py", line 1, in <module>
+    from ._baseline import build_base_mean_adata
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/_baseline.py", line 8, in <module>
+    from pdex import parallel_differential_expression
+ImportError: cannot import name 'parallel_differential_expression' from 'pdex' (/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/pdex/__init__.py)
+[0m
+[[36m2026-09-30 12:04:37,956[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - Skipping cell-eval metrics for covariate k562[0m
+model                    PrimeFlow
+rmse_average                0.1966
+rmse_rank_average           0.3884
+cosine_pca_average          0.6238
+cosine_rank_pca_average     0.1101
+cosine_logfc                0.5579
+cosine_rank_logfc           0.1353
+r2_score_scores             0.1677
+top_k_recall_scores         0.3578
+mmd_pca                     6.0840
+mmd_rank_pca                0.3647
+covariate                  k562
+rmse_average             0.1966
+rmse_rank_average        0.3884
+cosine_pca_average       0.6238
+cosine_rank_pca_average  0.1101
+cosine_logfc             0.5579
+cosine_rank_logfc        0.1353
+r2_score_scores          0.1677
+top_k_recall_scores      0.3578
+mmd_pca                  6.0840
+mmd_rank_pca             0.3647
+Testing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1/1 0:46:36 • 0:00:00 0.00it/s 

@@ -1,0 +1,4 @@
+- experiment=primeflow/norman19
+- train=False
+- ckpt_path='logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/checkpoints/epoch=40-step=5043.ckpt'
+- +test_override.cfg_weight=3.0

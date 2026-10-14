@@ -1,0 +1,4 @@
+- experiment=neurips2025/norman19/biolord_best_params_norman19
+- data/evaluation=final_test
+- seed=245
+- paths.data_dir=/data/project/taehyeon/PRiMeFlow/data

@@ -1,0 +1,11 @@
+metric,k562
+rmse_average,0.1279
+rmse_rank_average,0.3145
+cosine_pca_average,0.6367
+cosine_rank_pca_average,0.1005
+cosine_logfc,0.583
+cosine_rank_logfc,0.1184
+r2_score_scores,0.2128
+top_k_recall_scores,0.3491
+mmd_pca,3.027
+mmd_rank_pca,0.2874

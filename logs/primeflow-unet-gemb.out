@@ -1,0 +1,685 @@
+Seed set to 245
+[[36m2026-09-30 01:04:58,563[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/datasplitter.py:604: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for covariates, df in self.obs_dataframe.groupby(self.covariate_keys):
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+           train  val  test
+('k562',)    146   46    47
+[[36m2026-09-30 01:05:02,147[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - val dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-30 01:05:03,327[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:05:03,336[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 01:05:03,337[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating model <model.Primeflow.PrimeFlow>[0m
+[[36m2026-09-30 01:05:04,407[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating callbacks...[0m
+[[36m2026-09-30 01:05:04,407[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <early_stopping> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:04,408[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <lr_monitor> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:04,409[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_summary> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:04,410[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_checkpoint> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:04,412[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <rich_progress_bar> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:04,413[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating loggers...[0m
+[[36m2026-09-30 01:05:04,413[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <tensorboard> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:04,415[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <csv> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:04,416[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating trainer <lightning.pytorch.trainer.Trainer>[0m
+Trainer already configured with model summary callbacks: [<class 'lightning.pytorch.callbacks.rich_model_summary.RichModelSummary'>]. Skipping setting a default `ModelSummary` callback.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[[36m2026-09-30 01:05:04,479[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting training![0m
+You are using a CUDA device ('NVIDIA RTX A5000') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/4
+[rank: 1] Seed set to 245
+[[36m2026-09-30 01:05:09,776[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>[0m
+[rank: 2] Seed set to 245
+[[36m2026-09-30 01:05:09,837[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>[0m
+[rank: 3] Seed set to 245
+[[36m2026-09-30 01:05:09,976[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/datasplitter.py:604: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for covariates, df in self.obs_dataframe.groupby(self.covariate_keys):
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/datasplitter.py:604: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for covariates, df in self.obs_dataframe.groupby(self.covariate_keys):
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/datasplitter.py:604: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for covariates, df in self.obs_dataframe.groupby(self.covariate_keys):
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+           train  val  test
+('k562',)    146   46    47
+[[36m2026-09-30 01:05:12,810[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - val dataset is missing perturbations from train dataset.[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+           train  val  test
+('k562',)    146   46    47
+[[36m2026-09-30 01:05:12,921[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - val dataset is missing perturbations from train dataset.[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+[[36m2026-09-30 01:05:14,024[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:05:14,033[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 01:05:14,034[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating model <model.Primeflow.PrimeFlow>[0m
+[[36m2026-09-30 01:05:14,115[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:05:14,123[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 01:05:14,123[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating model <model.Primeflow.PrimeFlow>[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+           train  val  test
+('k562',)    146   46    47
+[[36m2026-09-30 01:05:14,282[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - val dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-30 01:05:15,009[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating callbacks...[0m
+[[36m2026-09-30 01:05:15,010[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <early_stopping> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,010[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <lr_monitor> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,011[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_summary> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,012[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_checkpoint> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,014[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <rich_progress_bar> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,015[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating loggers...[0m
+[[36m2026-09-30 01:05:15,015[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <tensorboard> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,017[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <csv> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,018[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating trainer <lightning.pytorch.trainer.Trainer>[0m
+[[36m2026-09-30 01:05:15,083[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting training![0m
+[[36m2026-09-30 01:05:15,110[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating callbacks...[0m
+[[36m2026-09-30 01:05:15,110[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <early_stopping> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,111[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <lr_monitor> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,112[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_summary> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,113[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_checkpoint> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,115[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <rich_progress_bar> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,115[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating loggers...[0m
+[[36m2026-09-30 01:05:15,115[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <tensorboard> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,117[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <csv> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:15,119[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating trainer <lightning.pytorch.trainer.Trainer>[0m
+[[36m2026-09-30 01:05:15,188[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting training![0m
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/4
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/4
+[[36m2026-09-30 01:05:15,419[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:05:15,429[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 01:05:15,429[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating model <model.Primeflow.PrimeFlow>[0m
+[[36m2026-09-30 01:05:16,592[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating callbacks...[0m
+[[36m2026-09-30 01:05:16,593[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <early_stopping> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:16,594[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <lr_monitor> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:16,595[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_summary> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:16,595[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <model_checkpoint> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:16,598[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <rich_progress_bar> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:16,598[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating loggers...[0m
+[[36m2026-09-30 01:05:16,599[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <tensorboard> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:16,600[0m][[34mperturbench.modelcore.utils[0m][[32mINFO[0m] - Instantiating <csv> of type <DictConfig>[0m
+[[36m2026-09-30 01:05:16,602[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Instantiating trainer <lightning.pytorch.trainer.Trainer>[0m
+[[36m2026-09-30 01:05:16,667[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting training![0m
+Initializing distributed: GLOBAL_RANK: 3, MEMBER: 4/4
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 4 processes
+----------------------------------------------------------------------------------------------------
+
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 3 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+┏━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃     ┃ Name                                  ┃ Type   ┃ Para… ┃ Mode  ┃ FLOPs ┃
+┡━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0   │ velocity                              │ GeneU… │ 1.5 M │ train │     0 │
+│ 1   │ velocity.time_mlp                     │ Seque… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 2   │ velocity.time_mlp.0                   │ Linear │ 8.3 K │ train │     0 │
+│ 3   │ velocity.time_mlp.1                   │ SiLU   │     0 │ train │     0 │
+│ 4   │ velocity.time_mlp.2                   │ Linear │ 4.2 K │ train │     0 │
+│ 5   │ velocity.cond_mlp                     │ Seque… │  11.0 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 6   │ velocity.cond_mlp.0                   │ Linear │ 6.8 K │ train │     0 │
+│ 7   │ velocity.cond_mlp.1                   │ SiLU   │     0 │ train │     0 │
+│ 8   │ velocity.cond_mlp.2                   │ Linear │ 4.2 K │ train │     0 │
+│ 9   │ velocity.in_conv                      │ Conv1d │   832 │ train │     0 │
+│ 10  │ velocity.down_blocks                  │ Modul… │ 304 K │ train │     0 │
+│ 11  │ velocity.down_blocks.0                │ Modul… │ 3.7 K │ train │     0 │
+│ 12  │ velocity.down_blocks.0.0              │ ResBl… │ 3.7 K │ train │     0 │
+│ 13  │ velocity.down_blocks.0.0.in_layers    │ Seque… │   816 │ train │     0 │
+│ 14  │ velocity.down_blocks.0.0.in_layers.0  │ Group… │    32 │ train │     0 │
+│ 15  │ velocity.down_blocks.0.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 16  │ velocity.down_blocks.0.0.in_layers.2  │ Conv1d │   784 │ train │     0 │
+│ 17  │ velocity.down_blocks.0.0.emb_layers   │ Seque… │ 2.1 K │ train │     0 │
+│ 18  │ velocity.down_blocks.0.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 19  │ velocity.down_blocks.0.0.emb_layers.1 │ Linear │ 2.1 K │ train │     0 │
+│ 20  │ velocity.down_blocks.0.0.out_norm     │ Group… │    32 │ train │     0 │
+│ 21  │ velocity.down_blocks.0.0.out_layers   │ Seque… │   784 │ train │     0 │
+│ 22  │ velocity.down_blocks.0.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 23  │ velocity.down_blocks.0.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 24  │ velocity.down_blocks.0.0.out_layers.2 │ Conv1d │   784 │ train │     0 │
+│ 25  │ velocity.down_blocks.0.0.skip         │ Ident… │     0 │ train │     0 │
+│ 26  │ velocity.down_blocks.1                │ Modul… │ 3.7 K │ train │     0 │
+│ 27  │ velocity.down_blocks.1.0              │ ResBl… │ 3.7 K │ train │     0 │
+│ 28  │ velocity.down_blocks.1.0.in_layers    │ Seque… │   816 │ train │     0 │
+│ 29  │ velocity.down_blocks.1.0.in_layers.0  │ Group… │    32 │ train │     0 │
+│ 30  │ velocity.down_blocks.1.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 31  │ velocity.down_blocks.1.0.in_layers.2  │ Conv1d │   784 │ train │     0 │
+│ 32  │ velocity.down_blocks.1.0.emb_layers   │ Seque… │ 2.1 K │ train │     0 │
+│ 33  │ velocity.down_blocks.1.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 34  │ velocity.down_blocks.1.0.emb_layers.1 │ Linear │ 2.1 K │ train │     0 │
+│ 35  │ velocity.down_blocks.1.0.out_norm     │ Group… │    32 │ train │     0 │
+│ 36  │ velocity.down_blocks.1.0.out_layers   │ Seque… │   784 │ train │     0 │
+│ 37  │ velocity.down_blocks.1.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 38  │ velocity.down_blocks.1.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 39  │ velocity.down_blocks.1.0.out_layers.2 │ Conv1d │   784 │ train │     0 │
+│ 40  │ velocity.down_blocks.1.0.skip         │ Ident… │     0 │ train │     0 │
+│ 41  │ velocity.down_blocks.2                │ Modul… │ 9.5 K │ train │     0 │
+│ 42  │ velocity.down_blocks.2.0              │ ResBl… │ 9.5 K │ train │     0 │
+│ 43  │ velocity.down_blocks.2.0.in_layers    │ Seque… │ 1.6 K │ train │     0 │
+│ 44  │ velocity.down_blocks.2.0.in_layers.0  │ Group… │    32 │ train │     0 │
+│ 45  │ velocity.down_blocks.2.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 46  │ velocity.down_blocks.2.0.in_layers.2  │ Conv1d │ 1.6 K │ train │     0 │
+│ 47  │ velocity.down_blocks.2.0.emb_layers   │ Seque… │ 4.2 K │ train │     0 │
+│ 48  │ velocity.down_blocks.2.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 49  │ velocity.down_blocks.2.0.emb_layers.1 │ Linear │ 4.2 K │ train │     0 │
+│ 50  │ velocity.down_blocks.2.0.out_norm     │ Group… │    64 │ train │     0 │
+│ 51  │ velocity.down_blocks.2.0.out_layers   │ Seque… │ 3.1 K │ train │     0 │
+│ 52  │ velocity.down_blocks.2.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 53  │ velocity.down_blocks.2.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 54  │ velocity.down_blocks.2.0.out_layers.2 │ Conv1d │ 3.1 K │ train │     0 │
+│ 55  │ velocity.down_blocks.2.0.skip         │ Conv1d │   544 │ train │     0 │
+│ 56  │ velocity.down_blocks.3                │ Modul… │  10.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 57  │ velocity.down_blocks.3.0              │ ResBl… │  10.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 58  │ velocity.down_blocks.3.0.in_layers    │ Seque… │ 3.2 K │ train │     0 │
+│ 59  │ velocity.down_blocks.3.0.in_layers.0  │ Group… │    64 │ train │     0 │
+│ 60  │ velocity.down_blocks.3.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 61  │ velocity.down_blocks.3.0.in_layers.2  │ Conv1d │ 3.1 K │ train │     0 │
+│ 62  │ velocity.down_blocks.3.0.emb_layers   │ Seque… │ 4.2 K │ train │     0 │
+│ 63  │ velocity.down_blocks.3.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 64  │ velocity.down_blocks.3.0.emb_layers.1 │ Linear │ 4.2 K │ train │     0 │
+│ 65  │ velocity.down_blocks.3.0.out_norm     │ Group… │    64 │ train │     0 │
+│ 66  │ velocity.down_blocks.3.0.out_layers   │ Seque… │ 3.1 K │ train │     0 │
+│ 67  │ velocity.down_blocks.3.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 68  │ velocity.down_blocks.3.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 69  │ velocity.down_blocks.3.0.out_layers.2 │ Conv1d │ 3.1 K │ train │     0 │
+│ 70  │ velocity.down_blocks.3.0.skip         │ Ident… │     0 │ train │     0 │
+│ 71  │ velocity.down_blocks.4                │ Modul… │  29.2 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 72  │ velocity.down_blocks.4.0              │ ResBl… │  29.2 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 73  │ velocity.down_blocks.4.0.in_layers    │ Seque… │ 6.3 K │ train │     0 │
+│ 74  │ velocity.down_blocks.4.0.in_layers.0  │ Group… │    64 │ train │     0 │
+│ 75  │ velocity.down_blocks.4.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 76  │ velocity.down_blocks.4.0.in_layers.2  │ Conv1d │ 6.2 K │ train │     0 │
+│ 77  │ velocity.down_blocks.4.0.emb_layers   │ Seque… │ 8.3 K │ train │     0 │
+│ 78  │ velocity.down_blocks.4.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 79  │ velocity.down_blocks.4.0.emb_layers.1 │ Linear │ 8.3 K │ train │     0 │
+│ 80  │ velocity.down_blocks.4.0.out_norm     │ Group… │   128 │ train │     0 │
+│ 81  │ velocity.down_blocks.4.0.out_layers   │ Seque… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 82  │ velocity.down_blocks.4.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 83  │ velocity.down_blocks.4.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 84  │ velocity.down_blocks.4.0.out_layers.2 │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 85  │ velocity.down_blocks.4.0.skip         │ Conv1d │ 2.1 K │ train │     0 │
+│ 86  │ velocity.down_blocks.5                │ Modul… │  33.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 87  │ velocity.down_blocks.5.0              │ ResBl… │  33.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 88  │ velocity.down_blocks.5.0.in_layers    │ Seque… │  12.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 89  │ velocity.down_blocks.5.0.in_layers.0  │ Group… │   128 │ train │     0 │
+│ 90  │ velocity.down_blocks.5.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 91  │ velocity.down_blocks.5.0.in_layers.2  │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 92  │ velocity.down_blocks.5.0.emb_layers   │ Seque… │ 8.3 K │ train │     0 │
+│ 93  │ velocity.down_blocks.5.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 94  │ velocity.down_blocks.5.0.emb_layers.1 │ Linear │ 8.3 K │ train │     0 │
+│ 95  │ velocity.down_blocks.5.0.out_norm     │ Group… │   128 │ train │     0 │
+│ 96  │ velocity.down_blocks.5.0.out_layers   │ Seque… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 97  │ velocity.down_blocks.5.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 98  │ velocity.down_blocks.5.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 99  │ velocity.down_blocks.5.0.out_layers.2 │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 100 │ velocity.down_blocks.5.0.skip         │ Ident… │     0 │ train │     0 │
+│ 101 │ velocity.down_blocks.6                │ Modul… │  99.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 102 │ velocity.down_blocks.6.0              │ ResBl… │  99.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 103 │ velocity.down_blocks.6.0.in_layers    │ Seque… │  24.8 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 104 │ velocity.down_blocks.6.0.in_layers.0  │ Group… │   128 │ train │     0 │
+│ 105 │ velocity.down_blocks.6.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 106 │ velocity.down_blocks.6.0.in_layers.2  │ Conv1d │  24.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 107 │ velocity.down_blocks.6.0.emb_layers   │ Seque… │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 108 │ velocity.down_blocks.6.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 109 │ velocity.down_blocks.6.0.emb_layers.1 │ Linear │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 110 │ velocity.down_blocks.6.0.out_norm     │ Group… │   256 │ train │     0 │
+│ 111 │ velocity.down_blocks.6.0.out_layers   │ Seque… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 112 │ velocity.down_blocks.6.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 113 │ velocity.down_blocks.6.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 114 │ velocity.down_blocks.6.0.out_layers.2 │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 115 │ velocity.down_blocks.6.0.skip         │ Conv1d │ 8.3 K │ train │     0 │
+│ 116 │ velocity.down_blocks.7                │ Modul… │ 115 K │ train │     0 │
+│ 117 │ velocity.down_blocks.7.0              │ ResBl… │ 115 K │ train │     0 │
+│ 118 │ velocity.down_blocks.7.0.in_layers    │ Seque… │  49.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 119 │ velocity.down_blocks.7.0.in_layers.0  │ Group… │   256 │ train │     0 │
+│ 120 │ velocity.down_blocks.7.0.in_layers.1  │ SiLU   │     0 │ train │     0 │
+│ 121 │ velocity.down_blocks.7.0.in_layers.2  │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 122 │ velocity.down_blocks.7.0.emb_layers   │ Seque… │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 123 │ velocity.down_blocks.7.0.emb_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 124 │ velocity.down_blocks.7.0.emb_layers.1 │ Linear │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 125 │ velocity.down_blocks.7.0.out_norm     │ Group… │   256 │ train │     0 │
+│ 126 │ velocity.down_blocks.7.0.out_layers   │ Seque… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 127 │ velocity.down_blocks.7.0.out_layers.0 │ SiLU   │     0 │ train │     0 │
+│ 128 │ velocity.down_blocks.7.0.out_layers.1 │ Dropo… │     0 │ train │     0 │
+│ 129 │ velocity.down_blocks.7.0.out_layers.2 │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 130 │ velocity.down_blocks.7.0.skip         │ Ident… │     0 │ train │     0 │
+│ 131 │ velocity.downsamples                  │ Modul… │  16.2 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 132 │ velocity.downsamples.0                │ Downs… │   784 │ train │     0 │
+│ 133 │ velocity.downsamples.0.op             │ Conv1d │   784 │ train │     0 │
+│ 134 │ velocity.downsamples.1                │ Downs… │ 3.1 K │ train │     0 │
+│ 135 │ velocity.downsamples.1.op             │ Conv1d │ 3.1 K │ train │     0 │
+│ 136 │ velocity.downsamples.2                │ Downs… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 137 │ velocity.downsamples.2.op             │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 138 │ velocity.mid                          │ Modul… │ 231 K │ train │     0 │
+│ 139 │ velocity.mid.0                        │ ResBl… │ 115 K │ train │     0 │
+│ 140 │ velocity.mid.0.in_layers              │ Seque… │  49.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 141 │ velocity.mid.0.in_layers.0            │ Group… │   256 │ train │     0 │
+│ 142 │ velocity.mid.0.in_layers.1            │ SiLU   │     0 │ train │     0 │
+│ 143 │ velocity.mid.0.in_layers.2            │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 144 │ velocity.mid.0.emb_layers             │ Seque… │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 145 │ velocity.mid.0.emb_layers.0           │ SiLU   │     0 │ train │     0 │
+│ 146 │ velocity.mid.0.emb_layers.1           │ Linear │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 147 │ velocity.mid.0.out_norm               │ Group… │   256 │ train │     0 │
+│ 148 │ velocity.mid.0.out_layers             │ Seque… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 149 │ velocity.mid.0.out_layers.0           │ SiLU   │     0 │ train │     0 │
+│ 150 │ velocity.mid.0.out_layers.1           │ Dropo… │     0 │ train │     0 │
+│ 151 │ velocity.mid.0.out_layers.2           │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 152 │ velocity.mid.0.skip                   │ Ident… │     0 │ train │     0 │
+│ 153 │ velocity.mid.1                        │ ResBl… │ 115 K │ train │     0 │
+│ 154 │ velocity.mid.1.in_layers              │ Seque… │  49.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 155 │ velocity.mid.1.in_layers.0            │ Group… │   256 │ train │     0 │
+│ 156 │ velocity.mid.1.in_layers.1            │ SiLU   │     0 │ train │     0 │
+│ 157 │ velocity.mid.1.in_layers.2            │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 158 │ velocity.mid.1.emb_layers             │ Seque… │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 159 │ velocity.mid.1.emb_layers.0           │ SiLU   │     0 │ train │     0 │
+│ 160 │ velocity.mid.1.emb_layers.1           │ Linear │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 161 │ velocity.mid.1.out_norm               │ Group… │   256 │ train │     0 │
+│ 162 │ velocity.mid.1.out_layers             │ Seque… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 163 │ velocity.mid.1.out_layers.0           │ SiLU   │     0 │ train │     0 │
+│ 164 │ velocity.mid.1.out_layers.1           │ Dropo… │     0 │ train │     0 │
+│ 165 │ velocity.mid.1.out_layers.2           │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 166 │ velocity.mid.1.skip                   │ Ident… │     0 │ train │     0 │
+│ 167 │ velocity.up_blocks                    │ Modul… │ 796 K │ train │     0 │
+│ 168 │ velocity.up_blocks.0                  │ Modul… │ 198 K │ train │     0 │
+│ 169 │ velocity.up_blocks.0.0                │ ResBl… │ 198 K │ train │     0 │
+│ 170 │ velocity.up_blocks.0.0.in_layers      │ Seque… │  98.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 171 │ velocity.up_blocks.0.0.in_layers.0    │ Group… │   512 │ train │     0 │
+│ 172 │ velocity.up_blocks.0.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 173 │ velocity.up_blocks.0.0.in_layers.2    │ Conv1d │  98.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 174 │ velocity.up_blocks.0.0.emb_layers     │ Seque… │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 175 │ velocity.up_blocks.0.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 176 │ velocity.up_blocks.0.0.emb_layers.1   │ Linear │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 177 │ velocity.up_blocks.0.0.out_norm       │ Group… │   256 │ train │     0 │
+│ 178 │ velocity.up_blocks.0.0.out_layers     │ Seque… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 179 │ velocity.up_blocks.0.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 180 │ velocity.up_blocks.0.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 181 │ velocity.up_blocks.0.0.out_layers.2   │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 182 │ velocity.up_blocks.0.0.skip           │ Conv1d │  32.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 183 │ velocity.up_blocks.1                  │ Modul… │ 198 K │ train │     0 │
+│ 184 │ velocity.up_blocks.1.0                │ ResBl… │ 198 K │ train │     0 │
+│ 185 │ velocity.up_blocks.1.0.in_layers      │ Seque… │  98.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 186 │ velocity.up_blocks.1.0.in_layers.0    │ Group… │   512 │ train │     0 │
+│ 187 │ velocity.up_blocks.1.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 188 │ velocity.up_blocks.1.0.in_layers.2    │ Conv1d │  98.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 189 │ velocity.up_blocks.1.0.emb_layers     │ Seque… │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 190 │ velocity.up_blocks.1.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 191 │ velocity.up_blocks.1.0.emb_layers.1   │ Linear │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 192 │ velocity.up_blocks.1.0.out_norm       │ Group… │   256 │ train │     0 │
+│ 193 │ velocity.up_blocks.1.0.out_layers     │ Seque… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 194 │ velocity.up_blocks.1.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 195 │ velocity.up_blocks.1.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 196 │ velocity.up_blocks.1.0.out_layers.2   │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 197 │ velocity.up_blocks.1.0.skip           │ Conv1d │  32.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 198 │ velocity.up_blocks.2                  │ Modul… │ 165 K │ train │     0 │
+│ 199 │ velocity.up_blocks.2.0                │ ResBl… │ 165 K │ train │     0 │
+│ 200 │ velocity.up_blocks.2.0.in_layers      │ Seque… │  74.2 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 201 │ velocity.up_blocks.2.0.in_layers.0    │ Group… │   384 │ train │     0 │
+│ 202 │ velocity.up_blocks.2.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 203 │ velocity.up_blocks.2.0.in_layers.2    │ Conv1d │  73.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 204 │ velocity.up_blocks.2.0.emb_layers     │ Seque… │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 205 │ velocity.up_blocks.2.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 206 │ velocity.up_blocks.2.0.emb_layers.1   │ Linear │  16.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 207 │ velocity.up_blocks.2.0.out_norm       │ Group… │   256 │ train │     0 │
+│ 208 │ velocity.up_blocks.2.0.out_layers     │ Seque… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 209 │ velocity.up_blocks.2.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 210 │ velocity.up_blocks.2.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 211 │ velocity.up_blocks.2.0.out_layers.2   │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 212 │ velocity.up_blocks.2.0.skip           │ Conv1d │  24.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 213 │ velocity.up_blocks.3                  │ Modul… │  70.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 214 │ velocity.up_blocks.3.0                │ ResBl… │  70.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 215 │ velocity.up_blocks.3.0.in_layers      │ Seque… │  37.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 216 │ velocity.up_blocks.3.0.in_layers.0    │ Group… │   384 │ train │     0 │
+│ 217 │ velocity.up_blocks.3.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 218 │ velocity.up_blocks.3.0.in_layers.2    │ Conv1d │  36.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 219 │ velocity.up_blocks.3.0.emb_layers     │ Seque… │ 8.3 K │ train │     0 │
+│ 220 │ velocity.up_blocks.3.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 221 │ velocity.up_blocks.3.0.emb_layers.1   │ Linear │ 8.3 K │ train │     0 │
+│ 222 │ velocity.up_blocks.3.0.out_norm       │ Group… │   128 │ train │     0 │
+│ 223 │ velocity.up_blocks.3.0.out_layers     │ Seque… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 224 │ velocity.up_blocks.3.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 225 │ velocity.up_blocks.3.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 226 │ velocity.up_blocks.3.0.out_layers.2   │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 227 │ velocity.up_blocks.3.0.skip           │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 228 │ velocity.up_blocks.4                  │ Modul… │  54.0 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 229 │ velocity.up_blocks.4.0                │ ResBl… │  54.0 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 230 │ velocity.up_blocks.4.0.in_layers      │ Seque… │  24.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 231 │ velocity.up_blocks.4.0.in_layers.0    │ Group… │   256 │ train │     0 │
+│ 232 │ velocity.up_blocks.4.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 233 │ velocity.up_blocks.4.0.in_layers.2    │ Conv1d │  24.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 234 │ velocity.up_blocks.4.0.emb_layers     │ Seque… │ 8.3 K │ train │     0 │
+│ 235 │ velocity.up_blocks.4.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 236 │ velocity.up_blocks.4.0.emb_layers.1   │ Linear │ 8.3 K │ train │     0 │
+│ 237 │ velocity.up_blocks.4.0.out_norm       │ Group… │   128 │ train │     0 │
+│ 238 │ velocity.up_blocks.4.0.out_layers     │ Seque… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 239 │ velocity.up_blocks.4.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 240 │ velocity.up_blocks.4.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 241 │ velocity.up_blocks.4.0.out_layers.2   │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 242 │ velocity.up_blocks.4.0.skip           │ Conv1d │ 8.3 K │ train │     0 │
+│ 243 │ velocity.up_blocks.5                  │ Modul… │  45.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 244 │ velocity.up_blocks.5.0                │ ResBl… │  45.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 245 │ velocity.up_blocks.5.0.in_layers      │ Seque… │  18.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 246 │ velocity.up_blocks.5.0.in_layers.0    │ Group… │   192 │ train │     0 │
+│ 247 │ velocity.up_blocks.5.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 248 │ velocity.up_blocks.5.0.in_layers.2    │ Conv1d │  18.5 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 249 │ velocity.up_blocks.5.0.emb_layers     │ Seque… │ 8.3 K │ train │     0 │
+│ 250 │ velocity.up_blocks.5.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 251 │ velocity.up_blocks.5.0.emb_layers.1   │ Linear │ 8.3 K │ train │     0 │
+│ 252 │ velocity.up_blocks.5.0.out_norm       │ Group… │   128 │ train │     0 │
+│ 253 │ velocity.up_blocks.5.0.out_layers     │ Seque… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 254 │ velocity.up_blocks.5.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 255 │ velocity.up_blocks.5.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 256 │ velocity.up_blocks.5.0.out_layers.2   │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 257 │ velocity.up_blocks.5.0.skip           │ Conv1d │ 6.2 K │ train │     0 │
+│ 258 │ velocity.up_blocks.6                  │ Modul… │  19.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 259 │ velocity.up_blocks.6.0                │ ResBl… │  19.9 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 260 │ velocity.up_blocks.6.0.in_layers      │ Seque… │ 9.4 K │ train │     0 │
+│ 261 │ velocity.up_blocks.6.0.in_layers.0    │ Group… │   192 │ train │     0 │
+│ 262 │ velocity.up_blocks.6.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 263 │ velocity.up_blocks.6.0.in_layers.2    │ Conv1d │ 9.2 K │ train │     0 │
+│ 264 │ velocity.up_blocks.6.0.emb_layers     │ Seque… │ 4.2 K │ train │     0 │
+│ 265 │ velocity.up_blocks.6.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 266 │ velocity.up_blocks.6.0.emb_layers.1   │ Linear │ 4.2 K │ train │     0 │
+│ 267 │ velocity.up_blocks.6.0.out_norm       │ Group… │    64 │ train │     0 │
+│ 268 │ velocity.up_blocks.6.0.out_layers     │ Seque… │ 3.1 K │ train │     0 │
+│ 269 │ velocity.up_blocks.6.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 270 │ velocity.up_blocks.6.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 271 │ velocity.up_blocks.6.0.out_layers.2   │ Conv1d │ 3.1 K │ train │     0 │
+│ 272 │ velocity.up_blocks.6.0.skip           │ Conv1d │ 3.1 K │ train │     0 │
+│ 273 │ velocity.up_blocks.7                  │ Modul… │  15.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 274 │ velocity.up_blocks.7.0                │ ResBl… │  15.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 275 │ velocity.up_blocks.7.0.in_layers      │ Seque… │ 6.3 K │ train │     0 │
+│ 276 │ velocity.up_blocks.7.0.in_layers.0    │ Group… │   128 │ train │     0 │
+│ 277 │ velocity.up_blocks.7.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 278 │ velocity.up_blocks.7.0.in_layers.2    │ Conv1d │ 6.2 K │ train │     0 │
+│ 279 │ velocity.up_blocks.7.0.emb_layers     │ Seque… │ 4.2 K │ train │     0 │
+│ 280 │ velocity.up_blocks.7.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 281 │ velocity.up_blocks.7.0.emb_layers.1   │ Linear │ 4.2 K │ train │     0 │
+│ 282 │ velocity.up_blocks.7.0.out_norm       │ Group… │    64 │ train │     0 │
+│ 283 │ velocity.up_blocks.7.0.out_layers     │ Seque… │ 3.1 K │ train │     0 │
+│ 284 │ velocity.up_blocks.7.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 285 │ velocity.up_blocks.7.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 286 │ velocity.up_blocks.7.0.out_layers.2   │ Conv1d │ 3.1 K │ train │     0 │
+│ 287 │ velocity.up_blocks.7.0.skip           │ Conv1d │ 2.1 K │ train │     0 │
+│ 288 │ velocity.up_blocks.8                  │ Modul… │  13.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 289 │ velocity.up_blocks.8.0                │ ResBl… │  13.6 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 290 │ velocity.up_blocks.8.0.in_layers      │ Seque… │ 4.7 K │ train │     0 │
+│ 291 │ velocity.up_blocks.8.0.in_layers.0    │ Group… │    96 │ train │     0 │
+│ 292 │ velocity.up_blocks.8.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 293 │ velocity.up_blocks.8.0.in_layers.2    │ Conv1d │ 4.6 K │ train │     0 │
+│ 294 │ velocity.up_blocks.8.0.emb_layers     │ Seque… │ 4.2 K │ train │     0 │
+│ 295 │ velocity.up_blocks.8.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 296 │ velocity.up_blocks.8.0.emb_layers.1   │ Linear │ 4.2 K │ train │     0 │
+│ 297 │ velocity.up_blocks.8.0.out_norm       │ Group… │    64 │ train │     0 │
+│ 298 │ velocity.up_blocks.8.0.out_layers     │ Seque… │ 3.1 K │ train │     0 │
+│ 299 │ velocity.up_blocks.8.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 300 │ velocity.up_blocks.8.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 301 │ velocity.up_blocks.8.0.out_layers.2   │ Conv1d │ 3.1 K │ train │     0 │
+│ 302 │ velocity.up_blocks.8.0.skip           │ Conv1d │ 1.6 K │ train │     0 │
+│ 303 │ velocity.up_blocks.9                  │ Modul… │ 6.1 K │ train │     0 │
+│ 304 │ velocity.up_blocks.9.0                │ ResBl… │ 6.1 K │ train │     0 │
+│ 305 │ velocity.up_blocks.9.0.in_layers      │ Seque… │ 2.4 K │ train │     0 │
+│ 306 │ velocity.up_blocks.9.0.in_layers.0    │ Group… │    96 │ train │     0 │
+│ 307 │ velocity.up_blocks.9.0.in_layers.1    │ SiLU   │     0 │ train │     0 │
+│ 308 │ velocity.up_blocks.9.0.in_layers.2    │ Conv1d │ 2.3 K │ train │     0 │
+│ 309 │ velocity.up_blocks.9.0.emb_layers     │ Seque… │ 2.1 K │ train │     0 │
+│ 310 │ velocity.up_blocks.9.0.emb_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 311 │ velocity.up_blocks.9.0.emb_layers.1   │ Linear │ 2.1 K │ train │     0 │
+│ 312 │ velocity.up_blocks.9.0.out_norm       │ Group… │    32 │ train │     0 │
+│ 313 │ velocity.up_blocks.9.0.out_layers     │ Seque… │   784 │ train │     0 │
+│ 314 │ velocity.up_blocks.9.0.out_layers.0   │ SiLU   │     0 │ train │     0 │
+│ 315 │ velocity.up_blocks.9.0.out_layers.1   │ Dropo… │     0 │ train │     0 │
+│ 316 │ velocity.up_blocks.9.0.out_layers.2   │ Conv1d │   784 │ train │     0 │
+│ 317 │ velocity.up_blocks.9.0.skip           │ Conv1d │   784 │ train │     0 │
+│ 318 │ velocity.up_blocks.10                 │ Modul… │ 5.0 K │ train │     0 │
+│ 319 │ velocity.up_blocks.10.0               │ ResBl… │ 5.0 K │ train │     0 │
+│ 320 │ velocity.up_blocks.10.0.in_layers     │ Seque… │ 1.6 K │ train │     0 │
+│ 321 │ velocity.up_blocks.10.0.in_layers.0   │ Group… │    64 │ train │     0 │
+│ 322 │ velocity.up_blocks.10.0.in_layers.1   │ SiLU   │     0 │ train │     0 │
+│ 323 │ velocity.up_blocks.10.0.in_layers.2   │ Conv1d │ 1.6 K │ train │     0 │
+│ 324 │ velocity.up_blocks.10.0.emb_layers    │ Seque… │ 2.1 K │ train │     0 │
+│ 325 │ velocity.up_blocks.10.0.emb_layers.0  │ SiLU   │     0 │ train │     0 │
+│ 326 │ velocity.up_blocks.10.0.emb_layers.1  │ Linear │ 2.1 K │ train │     0 │
+│ 327 │ velocity.up_blocks.10.0.out_norm      │ Group… │    32 │ train │     0 │
+│ 328 │ velocity.up_blocks.10.0.out_layers    │ Seque… │   784 │ train │     0 │
+│ 329 │ velocity.up_blocks.10.0.out_layers.0  │ SiLU   │     0 │ train │     0 │
+│ 330 │ velocity.up_blocks.10.0.out_layers.1  │ Dropo… │     0 │ train │     0 │
+│ 331 │ velocity.up_blocks.10.0.out_layers.2  │ Conv1d │   784 │ train │     0 │
+│ 332 │ velocity.up_blocks.10.0.skip          │ Conv1d │   528 │ train │     0 │
+│ 333 │ velocity.up_blocks.11                 │ Modul… │ 5.0 K │ train │     0 │
+│ 334 │ velocity.up_blocks.11.0               │ ResBl… │ 5.0 K │ train │     0 │
+│ 335 │ velocity.up_blocks.11.0.in_layers     │ Seque… │ 1.6 K │ train │     0 │
+│ 336 │ velocity.up_blocks.11.0.in_layers.0   │ Group… │    64 │ train │     0 │
+│ 337 │ velocity.up_blocks.11.0.in_layers.1   │ SiLU   │     0 │ train │     0 │
+│ 338 │ velocity.up_blocks.11.0.in_layers.2   │ Conv1d │ 1.6 K │ train │     0 │
+│ 339 │ velocity.up_blocks.11.0.emb_layers    │ Seque… │ 2.1 K │ train │     0 │
+│ 340 │ velocity.up_blocks.11.0.emb_layers.0  │ SiLU   │     0 │ train │     0 │
+│ 341 │ velocity.up_blocks.11.0.emb_layers.1  │ Linear │ 2.1 K │ train │     0 │
+│ 342 │ velocity.up_blocks.11.0.out_norm      │ Group… │    32 │ train │     0 │
+│ 343 │ velocity.up_blocks.11.0.out_layers    │ Seque… │   784 │ train │     0 │
+│ 344 │ velocity.up_blocks.11.0.out_layers.0  │ SiLU   │     0 │ train │     0 │
+│ 345 │ velocity.up_blocks.11.0.out_layers.1  │ Dropo… │     0 │ train │     0 │
+│ 346 │ velocity.up_blocks.11.0.out_layers.2  │ Conv1d │   784 │ train │     0 │
+│ 347 │ velocity.up_blocks.11.0.skip          │ Conv1d │   528 │ train │     0 │
+│ 348 │ velocity.upsamples                    │ Modul… │  64.7 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 349 │ velocity.upsamples.0                  │ Upsam… │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 350 │ velocity.upsamples.0.conv             │ Conv1d │  49.3 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 351 │ velocity.upsamples.1                  │ Upsam… │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 352 │ velocity.upsamples.1.conv             │ Conv1d │  12.4 │ train │     0 │
+│     │                                       │        │     K │       │       │
+│ 353 │ velocity.upsamples.2                  │ Upsam… │ 3.1 K │ train │     0 │
+│ 354 │ velocity.upsamples.2.conv             │ Conv1d │ 3.1 K │ train │     0 │
+│ 355 │ velocity.out                          │ Seque… │    81 │ train │     0 │
+│ 356 │ velocity.out.0                        │ Group… │    32 │ train │     0 │
+│ 357 │ velocity.out.1                        │ SiLU   │     0 │ train │     0 │
+│ 358 │ velocity.out.2                        │ Conv1d │    49 │ train │     0 │
+└─────┴───────────────────────────────────────┴────────┴───────┴───────┴───────┘
+Trainable params: 1.5 M                                                         
+Non-trainable params: 0                                                         
+Total params: 1.5 M                                                             
+Total estimated model params size (MB): 6.110                                   
+Modules in train mode: 359                                                      
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+[PrimeFlow] arch=unet | source=noise | n_genes=5575 | cond_dim=106 | p_uncond=0.1 | cfg_weight=1.0
+[PrimeFlow] arch=unet | source=noise | n_genes=5575 | cond_dim=106 | p_uncond=0.1 | cfg_weight=1.0
+[PrimeFlow] arch=unet | source=noise | n_genes=5575 | cond_dim=106 | p_uncond=0.1 | cfg_weight=1.0
+[PrimeFlow] arch=unet | source=noise | n_genes=5575 | cond_dim=106 | p_uncond=0.1 | cfg_weight=1.0
+[[36m2026-09-30 01:39:45,718[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting testing![0m
+[[36m2026-09-30 01:39:45,737[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting testing![0m
+Epoch 50/99 ━━━━━━━━━━━━━━━━ 123/123 0:00:36 •        3.47it/s v_num: 0         
+                                     0:00:00                   train_loss: 0.232
+                                                               val_loss_step:   
+                                                               0.237            
+                                                               val_loss_epoch:  
+                                                               0.233            
+[[36m2026-09-30 01:39:45,757[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting testing![0m
+[[36m2026-09-30 01:39:45,774[0m][[34mperturbench.modelcore.train[0m][[32mINFO[0m] - Starting testing![0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+[[36m2026-09-30 01:39:46,183[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - test dataset is missing perturbations from train dataset.[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+[[36m2026-09-30 01:39:46,280[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - test dataset is missing perturbations from train dataset.[0m
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/data/utils.py:86: FutureWarning: The behavior of Series.replace (and DataFrame.replace) with CategoricalDtype is deprecated. In a future version, replace will only be used for cases that preserve the categories. To change the categories, use ser.cat.rename_categories instead.
+  combinations = combinations.replace(control_value, pd.NA)
+[[36m2026-09-30 01:39:46,321[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - test dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-30 01:39:46,329[0m][[34mperturbench.data.modules[0m][[33mWARNING[0m] - test dataset is missing perturbations from train dataset.[0m
+[[36m2026-09-30 01:39:47,385[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:39:47,392[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 01:39:47,540[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:39:47,548[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 01:39:47,583[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:39:47,592[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+[[36m2026-09-30 01:39:47,643[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/train_test_split.csv[0m
+[[36m2026-09-30 01:39:47,650[0m][[34mperturbench.data.modules[0m][[32mINFO[0m] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/perturbation_covariate_split_map.csv[0m
+Restoring states from the checkpoint path at /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/checkpoints/epoch=40-step=5043.ckpt
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 3 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+Loaded model weights from the checkpoint at /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/checkpoints/epoch=40-step=5043.ckpt
+/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/anndata/_core/anndata.py:1882: UserWarning: Observation names are not unique. To make them unique, call `.obs_names_make_unique`.
+  utils.warn_names_duplicates("obs")
+... storing 'covariate_combo' as categorical
+... storing 'covariate_combo' as categorical
+model                    PrimeFlow
+rmse_average               0.06587
+rmse_rank_average          0.08551
+cosine_pca_average         0.61850
+cosine_rank_pca_average    0.09855
+cosine_logfc               0.56580
+cosine_rank_logfc          0.13820
+r2_score_scores            0.22000
+top_k_recall_scores        0.18780
+mmd_pca                    0.86650
+mmd_rank_pca               0.08454
+covariate                   k562
+rmse_average             0.06587
+rmse_rank_average        0.08551
+cosine_pca_average       0.61850
+cosine_rank_pca_average  0.09855
+cosine_logfc             0.56580
+cosine_rank_logfc        0.13820
+r2_score_scores          0.22000
+top_k_recall_scores      0.18780
+mmd_pca                  0.86650
+mmd_rank_pca             0.08454
+[[36m2026-09-30 02:18:12,740[0m][[34mperturbench.modelcore.models.base[0m][[32mINFO[0m] - Launching cell-eval subprocess for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/evaluation//cell_eval/k562[0m
+[[36m2026-09-30 02:18:14,005[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - cell-eval subprocess failed (exit 1) for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-30_01-04-58_primeflow-unet-gemb/evaluation//cell_eval/k562.
+stderr: Traceback (most recent call last):
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 45, in <module>
+    main()
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 27, in main
+    from cell_eval import MetricsEvaluator
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/__init__.py", line 1, in <module>
+    from ._baseline import build_base_mean_adata
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/_baseline.py", line 8, in <module>
+    from pdex import parallel_differential_expression
+ImportError: cannot import name 'parallel_differential_expression' from 'pdex' (/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/pdex/__init__.py)
+[0m
+[[36m2026-09-30 02:18:14,244[0m][[34mperturbench.modelcore.models.base[0m][[33mWARNING[0m] - Skipping cell-eval metrics for covariate k562[0m
+model                    PrimeFlow
+rmse_average               0.06587
+rmse_rank_average          0.08551
+cosine_pca_average         0.61850
+cosine_rank_pca_average    0.09855
+cosine_logfc               0.56580
+cosine_rank_logfc          0.13820
+r2_score_scores            0.22000
+top_k_recall_scores        0.18780
+mmd_pca                    0.86650
+mmd_rank_pca               0.08454
+covariate                   k562
+rmse_average             0.06587
+rmse_rank_average        0.08551
+cosine_pca_average       0.61850
+cosine_rank_pca_average  0.09855
+cosine_logfc             0.56580
+cosine_rank_logfc        0.13820
+r2_score_scores          0.22000
+top_k_recall_scores      0.18780
+mmd_pca                  0.86650
+mmd_rank_pca             0.08454
+Testing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1/1 0:06:09 • 0:00:00 0.00it/s 

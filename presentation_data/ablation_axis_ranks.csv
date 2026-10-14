@@ -1,0 +1,5 @@
+model,Accuracy,Specificity,DEG recall,Distribution
+"PRiMeFlow(Unet, CFG=1.0)",4.0,4.0,4.0,4.0
+"PRiMeFlow(Unet+gemb, CFG=1.0)",1.75,1.5,3.0,1.0
+"PRiMeFlow(Unet+gemb, CFG=3.0)",1.5,1.75,2.0,2.0
+"PRiMeFlow(Unet+gemb, CFG=5.0)",2.75,2.75,1.0,3.0

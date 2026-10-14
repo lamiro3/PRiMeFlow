@@ -1,0 +1,22 @@
+2026-09-29 19:15:57 cpa (gpu 0) start
+2026-09-29 19:15:59 biolord (gpu 1) start
+2026-09-29 19:16:01 sams (gpu 2) start
+2026-09-29 19:16:03 latent (gpu 3) start
+2026-09-29 20:14:58 latent (gpu 3) exit=0
+2026-09-29 20:15:28 primeflow-unet (gpu 3) start
+2026-09-29 20:24:58 cpa (gpu 0) exit=0
+2026-09-29 20:24:58 linear (gpu 0) start
+2026-09-29 21:51:58 linear (gpu 0) exit=0
+2026-09-29 22:17:15 sams (gpu 2) exit=0
+2026-09-29 22:40:12 biolord (gpu 1) exit=0
+2026-09-29 22:40:12 decoder (gpu 1) start
+2026-09-29 22:40:35 decoder (gpu 1) exit=0
+2026-09-29 22:40:35 ALL DONE
+2026-09-29 23:14:02 decoder (gpu 1) start (decoder_only.py 버그 수정 후 수동 재실행, 22:40 run 은 shape 에러로 실패)
+2026-09-30 00:46:43 primeflow-unet (gpu 3) exit=0
+2026-09-30 01:04:53 primeflow-unet-gemb (gpu 0-3) start
+2026-09-30 02:18:17 primeflow-unet-gemb (gpu 0-3) exit=0
+2026-09-30 10:34:54 primeflow-unet-gemb-cfg3 (gpu 0) start
+2026-09-30 10:34:57 primeflow-unet-gemb-cfg5 (gpu 1) start
+2026-09-30 12:04:40 primeflow-unet-gemb-cfg5 (gpu 1) exit=0
+2026-09-30 12:05:24 primeflow-unet-gemb-cfg3 (gpu 0) exit=0

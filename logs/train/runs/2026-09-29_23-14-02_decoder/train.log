@@ -1,0 +1,34 @@
+[2026-09-29 23:14:02,152][perturbench.modelcore.train][INFO] - Instantiating datamodule <perturbench.data.modules.AnnDataLitModule>
+[2026-09-29 23:14:05,596][perturbench.data.modules][WARNING] - val dataset is missing perturbations from train dataset.
+[2026-09-29 23:14:06,747][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_23-14-02_decoder/train_test_split.csv
+[2026-09-29 23:14:06,755][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_23-14-02_decoder/perturbation_covariate_split_map.csv
+[2026-09-29 23:14:06,756][perturbench.modelcore.train][INFO] - Instantiating model <perturbench.modelcore.models.DecoderOnly>
+[2026-09-29 23:14:08,159][perturbench.modelcore.train][INFO] - Instantiating callbacks...
+[2026-09-29 23:14:08,160][perturbench.modelcore.utils][INFO] - Instantiating <early_stopping> of type <DictConfig>
+[2026-09-29 23:14:08,161][perturbench.modelcore.utils][INFO] - Instantiating <lr_monitor> of type <DictConfig>
+[2026-09-29 23:14:08,162][perturbench.modelcore.utils][INFO] - Instantiating <model_summary> of type <DictConfig>
+[2026-09-29 23:14:08,162][perturbench.modelcore.utils][INFO] - Instantiating <model_checkpoint> of type <DictConfig>
+[2026-09-29 23:14:08,165][perturbench.modelcore.utils][INFO] - Instantiating <rich_progress_bar> of type <DictConfig>
+[2026-09-29 23:14:08,166][perturbench.modelcore.train][INFO] - Instantiating loggers...
+[2026-09-29 23:14:08,166][perturbench.modelcore.utils][INFO] - Instantiating <tensorboard> of type <DictConfig>
+[2026-09-29 23:14:08,169][perturbench.modelcore.utils][INFO] - Instantiating <csv> of type <DictConfig>
+[2026-09-29 23:14:08,170][perturbench.modelcore.train][INFO] - Instantiating trainer <lightning.pytorch.trainer.Trainer>
+[2026-09-29 23:14:08,236][perturbench.modelcore.train][INFO] - Starting training!
+[2026-09-29 23:33:06,231][perturbench.modelcore.train][INFO] - Starting testing!
+[2026-09-29 23:33:06,666][perturbench.data.modules][WARNING] - test dataset is missing perturbations from train dataset.
+[2026-09-29 23:33:07,916][perturbench.data.modules][INFO] - Saved splits to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_23-14-02_decoder/train_test_split.csv
+[2026-09-29 23:33:07,924][perturbench.data.modules][INFO] - Saved perturbation-covariate-split mapping to /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_23-14-02_decoder/perturbation_covariate_split_map.csv
+[2026-09-30 00:07:13,912][perturbench.modelcore.models.base][INFO] - Launching cell-eval subprocess for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_23-14-02_decoder/evaluation//cell_eval/k562
+[2026-09-30 00:07:15,277][perturbench.modelcore.models.base][WARNING] - cell-eval subprocess failed (exit 1) for /data/project/taehyeon/PRiMeFlow/logs/train/runs/2026-09-29_23-14-02_decoder/evaluation//cell_eval/k562.
+stderr: Traceback (most recent call last):
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 45, in <module>
+    main()
+  File "/data/project/taehyeon/PRiMeFlow/perturbench/src/perturbench/modelcore/cell_eval_worker.py", line 27, in main
+    from cell_eval import MetricsEvaluator
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/__init__.py", line 1, in <module>
+    from ._baseline import build_base_mean_adata
+  File "/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/cell_eval/_baseline.py", line 8, in <module>
+    from pdex import parallel_differential_expression
+ImportError: cannot import name 'parallel_differential_expression' from 'pdex' (/data/project/taehyeon/Anaconda3/envs/perturbench/lib/python3.11/site-packages/pdex/__init__.py)
+
+[2026-09-30 00:07:15,583][perturbench.modelcore.models.base][WARNING] - Skipping cell-eval metrics for covariate k562

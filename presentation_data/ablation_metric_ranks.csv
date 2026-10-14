@@ -1,0 +1,5 @@
+model,RMSE,RMSE rank,cos PCA,cos rank PCA,cos logFC,cos rank logFC,R²,top-k recall,MMD PCA,MMD rank PCA
+"PRiMeFlow(Unet, CFG=1.0)",4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0
+"PRiMeFlow(Unet+gemb, CFG=1.0)",1.0,1.0,3.0,1.0,2.0,3.0,1.0,3.0,1.0,1.0
+"PRiMeFlow(Unet+gemb, CFG=3.0)",2.0,2.0,1.0,2.0,1.0,1.0,2.0,2.0,2.0,2.0
+"PRiMeFlow(Unet+gemb, CFG=5.0)",3.0,3.0,2.0,3.0,3.0,2.0,3.0,1.0,3.0,3.0
